@@ -26,7 +26,7 @@ export default function About() {
           <h1 className="font-serif-display text-5xl leading-[1.02] md:text-7xl">I help enterprises understand whether their AI is ready to trust.</h1>
           <div className="mt-8 space-y-6 text-lg leading-8 text-muted-foreground">
             <p>
-              Priya Darshani is CEO and co-founder of TaskHived, an AI validation infrastructure company for enterprises deploying Agentic AI systems. She co-founded TaskHived with Devendra Kumar to close a specific gap: organisations are building AI capability faster than they are building the capacity to trust it.
+              Priya Darshani is CEO and co-founder of TaskHived, an AI validation infrastructure company for enterprises deploying Agentic AI systems. TaskHived was built to close a specific gap: organisations are building AI capability faster than they are building the capacity to trust it.
             </p>
             <p>
               Her background spans strategy consulting, enterprise technology at IBM and KDDI, and marketing psychology. She works at the intersection of how AI systems actually perform and how organisations actually make decisions about them. Based in Singapore, she advises enterprises across regulated industries on AI governance, deployment readiness, and the trust infrastructure that responsible AI requires.
