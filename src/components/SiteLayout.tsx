@@ -45,7 +45,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             )}
             <button
               type="button"
-              onClick={() => setIsLight((value) => !value)}
+              onClick={() => setIsLight((v) => !v)}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-ring"
               aria-label="Toggle light and dark theme"
             >
@@ -56,7 +56,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-2 md:hidden">
             <button
               type="button"
-              onClick={() => setIsLight((value) => !value)}
+              onClick={() => setIsLight((v) => !v)}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground"
               aria-label="Toggle light and dark theme"
             >
@@ -64,7 +64,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             </button>
             <button
               type="button"
-              onClick={() => setMenuOpen((value) => !value)}
+              onClick={() => setMenuOpen((v) => !v)}
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground"
               aria-label="Toggle navigation menu"
             >
@@ -101,11 +101,11 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
 export function FooterCta() {
   return (
     <footer className="border-t border-border bg-card/35">
-      {/* @section: open-conversations-cta */}
+      {/* @section: footer-cta */}
       <section className="mx-auto grid max-w-7xl gap-8 px-5 py-14 md:grid-cols-[1fr_0.9fr] md:px-8 md:py-20">
         <div>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Open to conversations</p>
-          <h2 className="font-serif-display text-3xl leading-tight md:text-5xl">Let's talk about AI deployment, strategy, or whatever's on your mind.</h2>
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Get in touch</p>
+          <h2 className="font-serif-display text-3xl leading-tight md:text-5xl">For speaking, partnerships, or conversations on AI validation and deployment readiness, get in touch.</h2>
         </div>
         <form
           className="flex h-fit gap-2 self-end rounded-full border border-border bg-background p-2"
@@ -118,7 +118,7 @@ export function FooterCta() {
           <input
             id="contact-email"
             type="email"
-            placeholder="Your email"
+            placeholder="your@email.com"
             className="min-w-0 flex-1 bg-transparent px-4 text-sm outline-none placeholder:text-muted-foreground"
           />
           <button
@@ -130,6 +130,13 @@ export function FooterCta() {
           </button>
         </form>
       </section>
+
+      {/* @section: footer-attribution */}
+      <div className="border-t border-border/50 px-5 py-5 md:px-8">
+        <p className="mx-auto max-w-7xl text-xs text-muted-foreground">
+          Priya Darshani — CEO &amp; Co-founder, TaskHived. Writing on AI validation, Agentic AI, human judgment, and enterprise trust infrastructure.
+        </p>
+      </div>
     </footer>
   );
 }

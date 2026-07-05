@@ -1,21 +1,24 @@
 import { ArrowDownToLine } from "lucide-react";
 import { PostCard } from "@/components/PostCard";
 import { SiteLayout } from "@/components/SiteLayout";
+import { WhitepaperGateModal, useWhitepaperGate } from "@/components/WhitepaperGateModal";
 import { posts } from "@/data/posts";
 
 export default function Writing() {
   const featured = posts.find((post) => post.featured) ?? posts[0];
-  const remaining = posts.filter((post) => post.slug !== featured.slug);
+  const { open, setOpen, triggerDownload } = useWhitepaperGate();
 
   return (
     <SiteLayout>
+      {open && <WhitepaperGateModal onClose={() => setOpen(false)} />}
+
       {/* @section: writing-header */}
       <section className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
         <div className="max-w-4xl">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Writing</p>
-          <h1 className="font-serif-display text-5xl leading-tight md:text-7xl">Clear thinking on AI validation, enterprise trust, and deployment readiness.</h1>
+          <h1 className="font-serif-display text-5xl leading-tight md:text-7xl">AI validation, Agentic AI governance, human evaluation, and enterprise trust infrastructure.</h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground">
-            Essays from Priya Darshani on the practical work of moving AI from compelling prototypes to systems enterprises can trust.
+            Essays from Priya Darshani on the practical discipline of moving AI from compelling prototypes to systems enterprises can evaluate, govern, and trust.
           </p>
         </div>
       </section>
@@ -35,18 +38,17 @@ export default function Writing() {
                 Deploying AI in Regulated Industries Without Breaking Compliance
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-7 text-muted-foreground">
-                A 10-Week Framework for Financial Services, Healthcare, Telco, and Regulated Enterprise. A structured guide to navigating AI validation, governance, and deployment in high-stakes environments.
+                A 10-Week Framework for Financial Services, Healthcare, Telco, and Regulated Enterprise. A structured guide to AI validation infrastructure, governance, and deployment readiness in high-stakes environments.
               </p>
             </div>
             <div className="shrink-0">
-              <a
-                href="/whitepaper-ai-validation-enterprise.html"
-                target="_blank"
-                rel="noreferrer"
+              <button
+                type="button"
+                onClick={triggerDownload}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-[1.02]"
               >
                 <ArrowDownToLine className="h-4 w-4" /> Download White Paper
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -61,7 +63,6 @@ export default function Writing() {
           {posts.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
-          {remaining.length === 0 ? null : null}
         </div>
       </section>
     </SiteLayout>

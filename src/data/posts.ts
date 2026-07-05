@@ -23,40 +23,40 @@ export type Article = Post & {
 
 export const posts: Post[] = [
   {
-    title: "On AI validation, trust, and deployment readiness",
-    slug: "ai-validation-trust-deployment-readiness",
+    title: "The AI Trust Gap: Why Capability Is Moving Faster Than Confidence",
+    slug: "ai-trust-gap-capability-faster-than-confidence",
     date: "Dec 11, 2023",
     image: "/images/art_a_2.jpeg",
     excerpt:
       "AI validation is not a technical checkpoint. It is the discipline that decides whether an organisation can trust a system enough to put it in front of customers, employees, and regulators.",
   },
   {
-    title: "Why human evaluation still matters in AI validation",
-    slug: "why-human-evaluation-still-matters",
+    title: "Why Human Judgment Still Matters in AI Evaluation",
+    slug: "why-human-judgment-matters-ai-evaluation",
     date: "Dec 01, 2023",
     image: "/images/art_c_1.jpeg",
     excerpt:
       "Automated benchmarks are useful. They cannot tell you whether an AI system behaves well inside the messy reality of enterprise work.",
   },
   {
-    title: "What AI validation actually means",
-    slug: "what-ai-validation-actually-means",
+    title: "What Enterprises Should Measure Before Deploying AI Agents",
+    slug: "what-enterprises-should-measure-before-deploying-ai-agents",
     date: "Nov 15, 2023",
     image: "/images/art_d_2.jpeg",
     excerpt:
       "Validation is not a pass-or-fail stamp. It is a structured way to understand performance, limits, risk, and readiness across real use cases.",
   },
   {
-    title: "Building AI validation honestly.",
-    slug: "building-ai-validation-honestly",
+    title: "Agentic AI Needs Validation Infrastructure, Not Just Governance Documents",
+    slug: "agentic-ai-needs-validation-infrastructure",
     date: "Oct 12, 2023",
     image: "/images/art_e_2.jpeg",
     excerpt:
       "The honest version of AI validation starts with uncomfortable questions. What can fail, who notices, and what happens next?",
   },
   {
-    title: "TaskHived: AI Validation for real-world use",
-    slug: "taskhived-ai-validation-real-world-use",
+    title: "Why Regulated Industries Cannot Treat AI Validation as a Checkbox",
+    slug: "regulated-industries-ai-validation-not-a-checkbox",
     date: "Oct 26, 2023",
     image: "/images/article_5.jpeg",
     excerpt:
@@ -64,8 +64,8 @@ export const posts: Post[] = [
     featured: true,
   },
   {
-    title: "Six areas that shape my thinking and work",
-    slug: "six-areas-that-shape-my-thinking-and-work",
+    title: "The Difference Between AI Safety, AI Security, and AI Trust",
+    slug: "difference-ai-safety-security-trust",
     date: "Sep 15, 2023",
     image: "/images/art_f_1.jpeg",
     excerpt:
@@ -74,8 +74,8 @@ export const posts: Post[] = [
 ];
 
 export const featuredHomePost: Post = {
-  title: "The practical problem of AI deployment readiness",
-  slug: "practical-problem-ai-deployment-readiness",
+  title: "From AI Demo to Deployment: What Readiness Actually Requires",
+  slug: "from-ai-demo-to-deployment-readiness",
   date: "Sep 28, 2023",
   image: "/images/art_b_1.jpeg",
   excerpt:
@@ -84,7 +84,7 @@ export const featuredHomePost: Post = {
 
 export const articles: Record<string, Article> = {
   /* ─── Article A ─── */
-  "ai-validation-trust-deployment-readiness": {
+  "ai-trust-gap-capability-faster-than-confidence": {
     ...posts[0],
     heroImage: "/images/art_a_1.jpeg",
     sections: [
@@ -130,7 +130,7 @@ export const articles: Record<string, Article> = {
   },
 
   /* ─── Article B ─── */
-  "practical-problem-ai-deployment-readiness": {
+  "from-ai-demo-to-deployment-readiness": {
     ...featuredHomePost,
     heroImage: "/images/art_b_1.jpeg",
     sections: [
@@ -178,7 +178,7 @@ export const articles: Record<string, Article> = {
   },
 
   /* ─── Article C ─── */
-  "why-human-evaluation-still-matters": {
+  "why-human-judgment-matters-ai-evaluation": {
     ...posts[1],
     heroImage: "/images/art_c_1.jpeg",
     sections: [
@@ -214,7 +214,7 @@ export const articles: Record<string, Article> = {
   },
 
   /* ─── Article D ─── */
-  "what-ai-validation-actually-means": {
+  "what-enterprises-should-measure-before-deploying-ai-agents": {
     ...posts[2],
     heroImage: "/images/art_d_1.jpeg",
     sections: [
@@ -252,7 +252,7 @@ export const articles: Record<string, Article> = {
   },
 
   /* ─── Article E ─── */
-  "building-ai-validation-honestly": {
+  "agentic-ai-needs-validation-infrastructure": {
     ...posts[3],
     heroImage: "/images/art_e_1.jpeg",
     sections: [
@@ -292,7 +292,7 @@ export const articles: Record<string, Article> = {
   },
 
   /* ─── Article F ─── */
-  "six-areas-that-shape-my-thinking-and-work": {
+  "difference-ai-safety-security-trust": {
     ...posts[5],
     heroImage: "/images/art_f_1.jpeg",
     sections: [
@@ -340,7 +340,7 @@ export const articles: Record<string, Article> = {
   },
 
   /* ─── Article G (TaskHived) ─── */
-  "taskhived-ai-validation-real-world-use": {
+  "regulated-industries-ai-validation-not-a-checkbox": {
     ...posts[4],
     heroImage: "/images/article_5.jpeg",
     sections: [
