@@ -20,8 +20,8 @@ export default function About() {
   return (
     <SiteLayout>
       {/* @section: about-hero */}
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-[1fr_0.52fr] md:px-8 md:py-24 lg:gap-20">
-        <div>
+      <section className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+        <div className="max-w-4xl">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-primary">About Priya Darshani</p>
           <h1 className="font-serif-display text-5xl leading-[1.02] md:text-7xl">I help enterprises understand whether their AI is ready to trust.</h1>
           <div className="mt-8 space-y-6 text-lg leading-8 text-muted-foreground">
@@ -43,9 +43,6 @@ export default function About() {
               TaskHived <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
-        </div>
-        <div className="md:pt-14">
-          <img src="/images/headshot_1.jpeg" alt="Priya Darshani" className="aspect-[4/5] w-full rounded-2xl border border-border object-cover" />
         </div>
       </section>
 
