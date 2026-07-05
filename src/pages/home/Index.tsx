@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowDownToLine, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PostCard } from "@/components/PostCard";
 import { SiteLayout } from "@/components/SiteLayout";
@@ -66,6 +66,24 @@ const Index = () => {
           {posts.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
+        </div>
+      </section>
+
+      {/* @section: home-whitepaper-cta */}
+      <section className="mx-auto max-w-7xl px-5 pb-16 md:px-8 md:pb-20">
+        <div className="flex flex-col items-start gap-3 border-t border-border pt-10 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">White Paper</p>
+            <p className="mt-1 font-serif-display text-xl md:text-2xl">Deploying AI in Regulated Industries Without Breaking Compliance</p>
+          </div>
+          <a
+            href="/whitepaper-ai-validation-enterprise.html"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-primary px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground"
+          >
+            <ArrowDownToLine className="h-4 w-4" /> Download
+          </a>
         </div>
       </section>
     </SiteLayout>

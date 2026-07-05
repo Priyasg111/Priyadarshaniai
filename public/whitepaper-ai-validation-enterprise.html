@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deploying AI in Regulated Industries Without Breaking Compliance | Priya Darshani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      box-sizing: border-box;
+      break-after: page;
+      page-break-after: always;
+      position: relative;
+      padding: 23mm 22mm 18mm;
+      background: #ffffff;
+      color: #1e2529;
+    }
+
+    .page:last-child {
+      break-after: auto;
+      page-break-after: auto;
+    }
+
+    .keep-together,
+    table,
+    blockquote,
+    .callout,
+    .timeline-item,
+    .stat-box {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #d9dde2;
+      color: #1e2529;
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.58;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-weight: 400;
+      line-height: 1.05;
+      color: #1e2529;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 56px;
+      letter-spacing: -1.4px;
+    }
+
+    h2 {
+      font-size: 38px;
+      letter-spacing: -0.45px;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 25px;
+      margin: 22px 0 8px;
+    }
+
+    p {
+      font-size: 13.5px;
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+
+    li {
+      font-size: 12.8px;
+      margin-bottom: 7px;
+      padding-left: 2px;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    .print-button {
+      position: fixed;
+      right: 22px;
+      top: 22px;
+      z-index: 20;
+      border: 0;
+      border-radius: 999px;
+      background: #F5A623;
+      color: #0A0D0F;
+      font: 700 14px/1 "Inter", Arial, sans-serif;
+      padding: 13px 18px;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(10, 13, 15, 0.22);
+    }
+
+    .doc-shell {
+      width: 210mm;
+      margin: 0 auto;
+      box-shadow: 0 22px 70px rgba(10, 13, 15, 0.24);
+    }
+
+    .cover,
+    .back-cover {
+      background: #0A0D0F;
+      color: #ffffff;
+      padding: 25mm 22mm 20mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cover h1,
+    .cover h2,
+    .cover h3,
+    .back-cover h2,
+    .back-cover h3 {
+      color: #ffffff;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.78);
+      margin-bottom: 42mm;
+    }
+
+    .wordmark {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: 26px;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      color: #ffffff;
+    }
+
+    .cover-kicker,
+    .section-label {
+      color: #F5A623;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 12px;
+    }
+
+    .cover-title {
+      max-width: 164mm;
+      margin-bottom: 16px;
+    }
+
+    .cover-subtitle {
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.3;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 20px;
+    }
+
+    .accent-line {
+      color: #F5A623;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      margin: 0 0 30mm;
+      padding-top: 15px;
+      border-top: 3px solid #F5A623;
+      width: 150mm;
+    }
+
+    .cover-footer {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: 1fr 60mm;
+      gap: 18mm;
+      align-items: end;
+    }
+
+    .author-block p {
+      color: rgba(255, 255, 255, 0.86);
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .author-name {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: 30px;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .stat-box {
+      border-left: 5px solid #F5A623;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 15px 16px;
+    }
+
+    .stat-box .stat-number {
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 800;
+      color: #F5A623;
+      letter-spacing: -1px;
+      margin-bottom: 6px;
+    }
+
+    .stat-box p {
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 12px;
+      margin: 0;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid #F5A623;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .page-header .wordmark-light {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: 21px;
+      color: #1e2529;
+    }
+
+    .page-header .site {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #5f6b73;
+    }
+
+    .intro-lede {
+      font-size: 16px;
+      line-height: 1.62;
+      color: #263138;
+      margin-bottom: 16px;
+    }
+
+    .callout {
+      margin: 18px 0;
+      padding: 15px 17px;
+      border-left: 5px solid #F5A623;
+      background: #f6f7f9;
+    }
+
+    .callout h3,
+    .callout h4 {
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1e2529;
+      margin: 0 0 10px;
+    }
+
+    .accountability-grid,
+    .concern-grid,
+    .vertical-grid,
+    .monitoring-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .accountability-item,
+    .concern-item,
+    .vertical-item,
+    .monitoring-item {
+      border-top: 3px solid #F5A623;
+      background: #ffffff;
+      padding: 12px 13px;
+      box-shadow: 0 1px 0 rgba(30, 37, 41, 0.08);
+    }
+
+    .light-panel {
+      background: #f6f7f9;
+      padding: 15px;
+      margin-top: 14px;
+    }
+
+    .vertical-item h3,
+    .monitoring-item h3,
+    .concern-item h3,
+    .accountability-item h3 {
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: #1e2529;
+      margin: 0 0 7px;
+    }
+
+    .numbered-heading {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .numbered-heading .num {
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #F5A623;
+      color: #0A0D0F;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 28px;
+      text-align: center;
+    }
+
+    blockquote {
+      margin: 18px 0;
+      padding: 12px 0 12px 18px;
+      border-left: 5px solid #F5A623;
+      font-family: "DM Serif Display", Georgia, serif;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 1.22;
+      color: #1e2529;
+    }
+
+    blockquote cite {
+      display: block;
+      margin-top: 9px;
+      font-family: "Inter", Arial, sans-serif;
+      font-style: normal;
+      font-size: 11px;
+      line-height: 1.4;
+      color: #59656c;
+    }
+
+    .data-points {
+      margin: 15px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .data-points li {
+      margin: 0 0 10px;
+      padding: 10px 12px 10px 15px;
+      border-left: 4px solid #F5A623;
+      background: #f6f7f9;
+      font-size: 12.8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      table-layout: fixed;
+      font-size: 11.5px;
+    }
+
+    th {
+      background: #1e2529;
+      color: #ffffff;
+      text-align: left;
+      font-weight: 800;
+      padding: 9px 10px;
+      border: 1px solid #1e2529;
+    }
+
+    td {
+      vertical-align: top;
+      padding: 9px 10px;
+      border: 1px solid #d8dde2;
+      background: #ffffff;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .timeline-item {
+      border: 1px solid #d8dde2;
+      background: #ffffff;
+    }
+
+    .timeline-title {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      align-items: stretch;
+      background: #f6f7f9;
+      border-bottom: 1px solid #d8dde2;
+    }
+
+    .timeline-title .week-num {
+      background: #F5A623;
+      color: #0A0D0F;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .timeline-title h3 {
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      margin: 0;
+      padding: 9px 10px;
+    }
+
+    .timeline-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .timeline-col {
+      padding: 10px 11px;
+    }
+
+    .timeline-col:first-child {
+      border-right: 1px solid #d8dde2;
+    }
+
+    .timeline-col h4 {
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #F5A623;
+      margin: 0 0 5px;
+    }
+
+    .timeline-col p {
+      font-size: 11.1px;
+      line-height: 1.47;
+      margin-bottom: 5px;
+    }
+
+    .quote-banner {
+      margin-top: 18px;
+      padding: 17px 20px;
+      background: #1e2529;
+      color: #ffffff;
+      border-left: 6px solid #F5A623;
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: 28px;
+      line-height: 1.18;
+    }
+
+    .footer {
+      position: absolute;
+      left: 22mm;
+      right: 22mm;
+      bottom: 10mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #d8dde2;
+      padding-top: 7px;
+      color: #69757d;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .back-cover .brand-row {
+      margin-bottom: 40mm;
+    }
+
+    .back-content {
+      margin-top: auto;
+      margin-bottom: auto;
+      max-width: 158mm;
+    }
+
+    .back-content h2 {
+      font-size: 52px;
+      margin-bottom: 14px;
+    }
+
+    .back-content p {
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.86);
+      margin-bottom: 20px;
+    }
+
+    .contact-block {
+      border-left: 5px solid #F5A623;
+      padding-left: 16px;
+      margin-top: 22px;
+    }
+
+    .contact-block p {
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #ffffff;
+    }
+
+    .bottom-rule {
+      margin-top: auto;
+      border-bottom: 4px solid #F5A623;
+      padding-bottom: 13px;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 11px;
+    }
+
+    @media screen {
+      .page {
+        margin: 18px 0;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .doc-shell {
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .page {
+        margin: 0;
+        width: 210mm;
+        min-height: 297mm;
+      }
+
+      .print-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="print-button" onclick="window.print()">Print white paper</button>
+
+  <main class="doc-shell">
+    <section class="page cover">
+      <div class="brand-row">
+        <div class="wordmark">Priya Darshani</div>
+        <div>priyadarshani.ai</div>
+      </div>
+
+      <div class="cover-kicker">TaskHived White Paper</div>
+      <h1 class="cover-title">Deploying AI in Regulated Industries Without Breaking Compliance</h1>
+      <div class="cover-subtitle">A 10-Week Framework for Enterprise Leaders</div>
+      <div class="accent-line">Financial Services · Healthcare · Telco · Regulated Enterprise</div>
+
+      <div class="cover-footer">
+        <div class="author-block">
+          <div class="author-name">Priya Darshani</div>
+          <p>CEO, TaskHived</p>
+          <p>priyadarshani.ai</p>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">70%</div>
+          <p>of enterprises cannot fully verify the compliance of their outsourced AI systems.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-header">
+        <div class="wordmark-light">Priya Darshani</div>
+        <div class="site">priyadarshani.ai</div>
+      </div>
+
+      <div class="section-label">Page 2 · The Core Challenge</div>
+      <h2>The Problem Every Enterprise Leader Already Knows</h2>
+
+      <p class="intro-lede">Enterprises across financial services, healthcare, and regulated industries share one consistent blocker to AI adoption: not capability, but trust. The question is never "Can AI do this?" It is always "Can we trust it enough to deploy it, and defend that decision to a regulator?"</p>
+
+      <p>The compliance fear is real. Regulators hold the institution accountable, not the vendor. That asymmetry creates hesitation. Projects stall. Pilots stay pilots. Competitive advantage goes to whoever resolves that fear first.</p>
+
+      <p>The resolution is not caution. It is clarity. A structured split of accountability, where your team owns policy and risk tolerance, and the technical execution partner owns implementation and evidence, turns compliance from a blocker into a blueprint.</p>
+
+      <div class="callout">
+        <h3>Two sides of AI accountability</h3>
+        <div class="accountability-grid">
+          <div class="accountability-item">
+            <h3>Internal Team</h3>
+            <p>Interprets regulation, sets risk tolerance, and defines acceptable use policy. Example: "Our credit model cannot show bias exceeding 2% against any protected class."</p>
+          </div>
+          <div class="accountability-item">
+            <h3>External Validation Partner</h3>
+            <p>Implements explainability, builds secure pipelines, and generates automated audit logs to meet the defined tolerance.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer"><span>Priya Darshani · priyadarshani.ai</span><span>2</span></div>
+    </section>
+
+    <section class="page">
+      <div class="page-header">
+        <div class="wordmark-light">Priya Darshani</div>
+        <div class="site">priyadarshani.ai</div>
+      </div>
+
+      <div class="section-label">Page 3 · The State of AI Adoption</div>
+      <h2>The State of AI Adoption, 2025–2028</h2>
+
+      <h3>Where We Are</h3>
+      <p>AI adoption across regulated industries is fragmented. Most organisations are running limited pilots in low-risk back-office functions: fraud detection, KYC/AML checks, and administrative automation. These deliver quick wins. But deployment in higher-stakes areas, including personalised advice, clinical decision support, and risk-based pricing, remains cautious. Regulatory risk is cited as the primary blocker.</p>
+
+      <ul class="data-points">
+        <li><strong>75%</strong> of financial services firms now use some form of AI, up from 58% in 2022.</li>
+        <li>The global AI in Fintech market was valued at <strong>USD 9.45 billion in 2021</strong> and is projected to reach <strong>USD 41.16 billion by 2030</strong>, a <strong>16.5% CAGR</strong>, according to Grand View Research.</li>
+        <li>Market.us projects a <strong>20.5% CAGR</strong> for AI in financial services through 2033, reaching <strong>USD 76.2 billion</strong>.</li>
+      </ul>
+
+      <h3>The Road Ahead</h3>
+      <blockquote>
+        "The path to AI leadership will run through regulatory compliance. The companies that build trust by setting clear guardrails first are the ones that will win the market."
+        <cite>Brad Smith, Vice Chair and President, Microsoft</cite>
+      </blockquote>
+
+      <p>Regulatory frameworks like the EU AI Act are not headwinds, they are blueprints. As rules solidify, compliance shifts from a defensive cost to a competitive advantage. Firms building auditable, transparent AI systems today will capture disproportionate market share by 2028.</p>
+
+      <div class="footer"><span>Priya Darshani · priyadarshani.ai</span><span>3</span></div>
+    </section>
+
+    <section class="page">
+      <div class="page-header">
+        <div class="wordmark-light">Priya Darshani</div>
+        <div class="site">priyadarshani.ai</div>
+      </div>
+
+      <div class="section-label">Page 4 · Multi-Vertical Deployment Map</div>
+      <h2>Where AI Creates Value Across Regulated Industries</h2>
+
+      <div class="light-panel">
+        <div class="vertical-grid">
+          <div class="vertical-item">
+            <h3>Financial Services</h3>
+            <ul>
+              <li>Fraud detection and prevention</li>
+              <li>Credit scoring and risk management</li>
+              <li>Financial advisory and wealth management</li>
+              <li>Algorithmic trading</li>
+              <li>KYC/AML compliance</li>
+              <li>Personalised customer service</li>
+            </ul>
+          </div>
+          <div class="vertical-item">
+            <h3>Healthcare</h3>
+            <ul>
+              <li>Clinical decision support</li>
+              <li>Patient risk stratification</li>
+              <li>Operational efficiency and scheduling</li>
+              <li>Drug discovery and trial acceleration</li>
+              <li>Medical imaging analysis</li>
+              <li>Regulatory reporting</li>
+            </ul>
+          </div>
+          <div class="vertical-item">
+            <h3>Telecommunications, Telco</h3>
+            <ul>
+              <li>Network anomaly detection</li>
+              <li>Predictive maintenance</li>
+              <li>Customer churn prediction</li>
+              <li>Fraud detection in billing</li>
+              <li>AI-driven customer support</li>
+              <li>Spectrum and capacity optimisation</li>
+            </ul>
+          </div>
+          <div class="vertical-item">
+            <h3>Regulated Enterprise, Cross-Sector</h3>
+            <ul>
+              <li>Procurement risk analysis</li>
+              <li>Vendor compliance monitoring</li>
+              <li>Internal audit automation</li>
+              <li>Document intelligence and classification</li>
+              <li>ESG reporting</li>
+              <li>Workforce planning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer"><span>Priya Darshani · priyadarshani.ai</span><span>4</span></div>
+    </section>
+
+    <section class="page">
+      <div class="page-header">
+        <div class="wordmark-light">Priya Darshani</div>
+        <div class="site">priyadarshani.ai</div>
+      </div>
+
+      <div class="section-label">Page 5 · Core Compliance Concerns</div>
+      <h2>Three fears, three structured responses</h2>
+
+      <div class="concern-grid">
+        <div class="concern-item">
+          <div class="numbered-heading"><span class="num">1</span><h3>Unmanaged Bias</h3></div>
+          <p><strong>Risk:</strong> Models discriminate in credit scoring, loan approvals, hiring, or clinical triage, a core EU AI Act concern.</p>
+          <p><strong>Response:</strong> Define fairness metrics internally. Build automated testing that proves compliance on a continuous basis, not just at deployment.</p>
+        </div>
+        <div class="concern-item">
+          <div class="numbered-heading"><span class="num">2</span><h3>Data Leakage</h3></div>
+          <p><strong>Risk:</strong> Sensitive PII, AML data, or clinical records are mishandled or used to train external models.</p>
+          <p><strong>Response:</strong> Establish zero-trust data pipelines. Every dataset and usage policy requires explicit client authorisation before processing.</p>
+        </div>
+        <div class="concern-item" style="grid-column: 1 / -1;">
+          <div class="numbered-heading"><span class="num">3</span><h3>Lack of Audit Trail</h3></div>
+          <p><strong>Risk:</strong> Inability to demonstrate to regulators why a model made a specific decision, the black-box problem.</p>
+          <p><strong>Response:</strong> Build explainability engines and continuous compliance dashboards that maintain an immutable record of every decision, traceable to specific model versions.</p>
+        </div>
+      </div>
+
+      <div class="footer"><span>Priya Darshani · priyadarshani.ai</span><span>5</span></div>
+    </section>
+
+    <section class="page">
+      <div class="page-header">
+        <div class="wordmark-light">Priya Darshani</div>
+        <div class="site">priyadarshani.ai</div>
+      </div>
+
+      <div class="section-label">Page 6 · The 10-Week Deployment Roadmap</div>
+      <h2>From pilot to production, with compliance built in</h2>
+      <p>This framework defines ownership at every stage: what the internal team owns, and what the technical validation partner owns.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-title"><div class="week-num">1</div><h3>Weeks 1–2: Define Use Case and Risk Assessment</h3></div>
+          <div class="timeline-columns">
+            <div class="timeline-col"><h4>Internal</h4><p>Define risk appetite. Approve compliance framework, for example PSD3, HIPAA, or AML. Select AI use cases.</p><p><strong>Deliverable:</strong> Approved AI Acceptable Use Policy.</p></div>
+            <div class="timeline-col"><h4>External</h4><p>Translate regulatory requirements into technical specifications. Scope AI modules and produce initial secure architecture proposal.</p><p><strong>Deliverable:</strong> Scoped architecture proposal with effort estimate.</p></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title"><div class="week-num">2</div><h3>Weeks 3–4: Data Readiness and Privacy Controls</h3></div>
+          <div class="timeline-columns">
+            <div class="timeline-col"><h4>Internal</h4><p>Approve datasets. Validate GDPR, HIPAA, AML, and PII policies.</p><p><strong>Deliverable:</strong> Signed Data Usage Authorisation.</p></div>
+            <div class="timeline-col"><h4>External</h4><p>Build secure, zero-trust data pipelines. Implement tokenisation and automated data quality checks.</p><p><strong>Deliverable:</strong> Data quality and lineage tracking infrastructure.</p></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title"><div class="week-num">3</div><h3>Weeks 5–6: Explainability and Bias Testing</h3></div>
+          <div class="timeline-columns">
+            <div class="timeline-col"><h4>Internal</h4><p>Define and approve fairness metrics. Review initial bias reports.</p><p><strong>Deliverable:</strong> Approved Model Fairness Policy.</p></div>
+            <div class="timeline-col"><h4>External</h4><p>Implement model-agnostic explainability engines, such as SHAP. Automate bias drift checks. Generate compliance reports.</p><p><strong>Deliverable:</strong> Explainability API, integrated and validated.</p></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title"><div class="week-num">4</div><h3>Weeks 7–8: Integration with Existing Systems</h3></div>
+          <div class="timeline-columns">
+            <div class="timeline-col"><h4>Internal</h4><p>Approve IT architecture standards. Define SLAs for data exchange.</p><p><strong>Deliverable:</strong> Integration Architecture Sign-Off.</p></div>
+            <div class="timeline-col"><h4>External</h4><p>Develop microservices integration layer that isolates the AI module from core systems. Connect AI without direct access to sensitive legacy environments.</p><p><strong>Deliverable:</strong> Production-ready Integration Layer.</p></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title"><div class="week-num">5</div><h3>Weeks 9–10: Audit Trail and Regulator-Ready Evidence</h3></div>
+          <div class="timeline-columns">
+            <div class="timeline-col"><h4>Internal</h4><p>Define exact reporting format for regulator submissions. Own the final compliance dashboard.</p><p><strong>Deliverable:</strong> Audit and Compliance Dashboard Ownership.</p></div>
+            <div class="timeline-col"><h4>External</h4><p>Automate comprehensive logging and monitoring. Build continuous compliance dashboards tracking bias drift, data drift, and audit logs, traceable to specific code versions.</p><p><strong>Deliverable:</strong> Full Compliance Monitoring System.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer"><span>Priya Darshani · priyadarshani.ai</span><span>6</span></div>
+    </section>
+
+    <section class="page">
+      <div class="page-header">
+        <div class="wordmark-light">Priya Darshani</div>
+        <div class="site">priyadarshani.ai</div>
+      </div>
+
+      <div class="section-label">Page 7 · Continuous Monitoring</div>
+      <h2>The Compliance That Never Sleeps</h2>
+      <p class="intro-lede">Deployment is not the finish line.</p>
+      <p>The 10-week roadmap delivers a production-ready AI system. But compliance risk does not end at go-live. Three continuous monitoring mechanisms should be embedded from day one:</p>
+
+      <div class="monitoring-grid">
+        <div class="monitoring-item">
+          <h3>Data Drift Detection</h3>
+          <p>Alerts when new data deviating from training data enters the model. Ensures the model remains accurate and compliant as real-world data evolves.</p>
+        </div>
+        <div class="monitoring-item">
+          <h3>Bias Drift Monitoring</h3>
+          <p>Monitors production decisions continuously to detect discriminatory bias that can develop over time, as the model processes new transactions, applications, or clinical cases.</p>
+        </div>
+        <div class="monitoring-item" style="grid-column: 1 / -1;">
+          <h3>PII and Access Audits</h3>
+          <p>Constantly logs all data access points and usage to satisfy strict regulatory requirements around Personally Identifiable Information across all jurisdictions.</p>
+        </div>
+      </div>
+
+      <div class="footer"><span>Priya Darshani · priyadarshani.ai</span><span>7</span></div>
+    </section>
+
+    <section class="page">
+      <div class="page-header">
+        <div class="wordmark-light">Priya Darshani</div>
+        <div class="site">priyadarshani.ai</div>
+      </div>
+
+      <div class="section-label">Page 8 · Speed and Safety</div>
+      <h2>Why Speed Is Now Safety</h2>
+      <h3>The old model is obsolete</h3>
+
+      <p>Legacy compliance relied on quarterly reviews and annual audits. That approach was slow by design, a manual, human-intensive process that bottlenecked innovation. In a market moving at the pace of AI, it is a competitive liability.</p>
+
+      <p>Today, security and compliance are built into the automation pipeline itself. By shifting the compliance burden from manual review to automated engineering workflows, enterprises gain two things simultaneously: faster time-to-market for every new AI feature, and a regulator-ready, always-on audit trail.</p>
+
+      <p>The result is not a tradeoff between speed and safety. It is both, at once.</p>
+
+      <div class="quote-banner">"You own compliance. The validation layer owns execution."</div>
+
+      <div class="footer"><span>Priya Darshani · priyadarshani.ai</span><span>8</span></div>
+    </section>
+
+    <section class="page back-cover">
+      <div class="brand-row">
+        <div class="wordmark">Priya Darshani</div>
+        <div>priyadarshani.ai</div>
+      </div>
+
+      <div class="back-content">
+        <div class="section-label">Next step</div>
+        <h2>Ready to move from pilot to production?</h2>
+        <p>This framework is the foundation. The next step is applying it to your specific regulatory context, use case, and risk tolerance.</p>
+
+        <div class="contact-block">
+          <p><strong>Contact:</strong> priya@taskhived.com</p>
+          <p><strong>Website:</strong> priyadarshani.ai | taskhived.com</p>
+        </div>
+      </div>
+
+      <div class="bottom-rule">© 2025 Priya Darshani. All rights reserved.</div>
+    </section>
+  </main>
+</body>
+</html>

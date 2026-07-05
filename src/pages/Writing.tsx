@@ -1,3 +1,4 @@
+import { ArrowDownToLine } from "lucide-react";
 import { PostCard } from "@/components/PostCard";
 import { SiteLayout } from "@/components/SiteLayout";
 import { posts } from "@/data/posts";
@@ -22,6 +23,33 @@ export default function Writing() {
       {/* @section: writing-featured */}
       <section className="mx-auto max-w-7xl px-5 pb-16 md:px-8 md:pb-24">
         <PostCard post={featured} large />
+      </section>
+
+      {/* @section: writing-whitepaper */}
+      <section className="mx-auto max-w-7xl px-5 pb-10 md:px-8 md:pb-12">
+        <div className="rounded-2xl border border-primary/30 bg-card p-8 md:p-10">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary">White Paper</p>
+              <h2 className="font-serif-display text-2xl leading-tight md:text-3xl">
+                Deploying AI in Regulated Industries Without Breaking Compliance
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-7 text-muted-foreground">
+                A 10-Week Framework for Financial Services, Healthcare, Telco, and Regulated Enterprise. A structured guide to navigating AI validation, governance, and deployment in high-stakes environments.
+              </p>
+            </div>
+            <div className="shrink-0">
+              <a
+                href="/whitepaper-ai-validation-enterprise.html"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-[1.02]"
+              >
+                <ArrowDownToLine className="h-4 w-4" /> Download White Paper
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* @section: writing-list */}
