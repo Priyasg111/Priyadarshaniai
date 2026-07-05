@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+==========================================================================
+【AI HANDOVER NOTE】
+1. DESIGN PHILOSOPHY:
+   - Core design philosophy: Editorial Authority with Restrained Luxury. This is a personal brand site for a CEO/strategist with McKinsey pedigree, requiring gravitas without corporate stiffness. The design follows a "content-first editorial" approach inspired by Palantir's technical authority, Stripe's refined minimalism, and Substack's reading-optimized layouts.
+   - Visual style: Neo-minimalist editorial with subtle physicality. Dark mode is the primary experience (matching the user's existing brand), featuring deep charcoal backgrounds with amber accent punctuation. Light mode exists as a refined alternative with warm off-whites. Surfaces use minimal elevation with precise 1px borders rather than heavy shadows, creating a flat-but-structured aesthetic.
+   - Why this style: The user operates at the intersection of strategy consulting and AI/tech. The design must signal intellectual rigor (serif display typography, restrained palette) while remaining approachable for a personal brand. The amber accent (#F5A623 reference) provides warmth and memorability without compromising authority.
+
+2. TYPOGRAPHY:
+   - DM Serif Display (headings): A contemporary serif with editorial character, bridging traditional authority and modern digital design. Its high contrast and refined details signal sophistication appropriate for thought leadership content. Used exclusively for h1-h3 to create strong typographic hierarchy.
+   - Inter (body): The gold standard for digital reading interfaces. Its exceptional legibility at all sizes, neutral personality, and comprehensive weight range make it ideal for long-form article content. The pairing with DM Serif Display creates classic editorial contrast (serif headlines + sans body) seen in premium publications.
+   - JetBrains Mono: Reserved for code snippets or technical data if articles discuss AI/tech implementation details.
+
+3. COLOR SYSTEM:
+   - Brand primary: Amber (hue 40°) derived directly from the user's existing #F5A623 accent. This warm, energetic hue conveys approachability and optimism while standing apart from the tech industry's default blues/purples. In OKLCH, primary uses moderate chroma (C≈0.15) for vibrancy without garishness.
+   - Semantic mapping: --primary carries the amber brand color for CTAs and interactive elements. --accent uses a slightly desaturated amber for hover states and secondary emphasis. --ring matches primary for focus states, maintaining brand consistency.
+   - Neutrals strategy: Dark mode uses charcoal backgrounds (L≈0.10-0.15) with a subtle warm tint (hue 220°, C≈0.01) to avoid harsh pure blacks. Light mode uses warm off-whites (L≈0.98, slight amber tint) for a softer reading experience than stark white. Borders are deliberately low-contrast (matching user's #1E242B reference) to maintain the flat, refined aesthetic.
+   - Semantic colors: Destructive uses a muted terracotta (hue 15°) rather than bright red, keeping the palette sophisticated. Success uses a forest green (hue 150°) with restrained chroma. Warning stays in the amber family (hue 50°) for palette cohesion.
+
+4. USAGE GUIDE:
+   - Layout type: Centered container editorial layout. Max-width 720px for article content (optimal reading line length), expanding to 1200px for home/listing grids. Generous vertical rhythm (1.5-2rem spacing) prioritizes readability.
+   - Recommended effects: Avoid glassmorphism and heavy blur effects. Use subtle border highlights (1px with muted-foreground) and minimal hover state transitions (150ms). Cards should feel flat with precise borders, not floating. Dark mode is default; include a prominent theme toggle in navigation.
+   - Project-specific rules: (1) Typography hierarchy is critical: DM Serif Display at 2.5-4rem for h1, Inter 1rem/1.5 line-height for body. (2) Amber accent is reserved for primary CTAs and active states only; do not overuse. (3) Article layouts must prioritize reading comfort: ample margins, clear paragraph spacing, pull quotes in serif. (4) Maintain the authoritative tone through whitespace and restraint rather than decorative elements. (5) VARIANCE LEVEL: LOW. This is a professional personal brand requiring consistency and refinement over visual experimentation.
+==========================================================================
+*/
+
+:root {
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif-display: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "Cascadia Code", monospace;
+  
+  /* Radius */
+  --radius: 0.5rem;
+
+  /* Core UI Tokens */
+  --background: oklch(0.98 0.008 40);
+  --foreground: oklch(0.15 0.01 220);
+  --card: oklch(0.97 0.006 40);
+  --card-foreground: oklch(0.15 0.01 220);
+  --popover: oklch(0.99 0.005 40);
+  --popover-foreground: oklch(0.15 0.01 220);
+  --primary: oklch(0.62 0.15 40);
+  --primary-foreground: oklch(0.98 0.008 40);
+  --secondary: oklch(0.92 0.01 220);
+  --secondary-foreground: oklch(0.20 0.01 220);
+  --muted: oklch(0.94 0.008 220);
+  --muted-foreground: oklch(0.48 0.01 220);
+  --accent: oklch(0.68 0.12 42);
+  --accent-foreground: oklch(0.15 0.01 220);
+  --destructive: oklch(0.55 0.14 15);
+  --destructive-foreground: oklch(0.98 0.008 40);
+  --border: oklch(0.88 0.01 220);
+  --input: oklch(0.88 0.01 220);
+  --ring: oklch(0.62 0.15 40);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.62 0.15 40);
+  --chart-2: oklch(0.55 0.12 220);
+  --chart-3: oklch(0.58 0.13 150);
+  --chart-4: oklch(0.60 0.11 280);
+  --chart-5: oklch(0.52 0.14 15);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.97 0.006 40);
+  --sidebar-foreground: oklch(0.15 0.01 220);
+  --sidebar-primary: oklch(0.62 0.15 40);
+  --sidebar-primary-foreground: oklch(0.98 0.008 40);
+  --sidebar-accent: oklch(0.68 0.12 42);
+  --sidebar-accent-foreground: oklch(0.15 0.01 220);
+  --sidebar-border: oklch(0.88 0.01 220);
+  --sidebar-ring: oklch(0.62 0.15 40);
+}
+
+.dark {
+  --background: oklch(0.10 0.01 220);
+  --foreground: oklch(0.95 0.005 40);
+  --card: oklch(0.14 0.012 220);
+  --card-foreground: oklch(0.95 0.005 40);
+  --popover: oklch(0.12 0.01 220);
+  --popover-foreground: oklch(0.95 0.005 40);
+  --primary: oklch(0.68 0.16 40);
+  --primary-foreground: oklch(0.10 0.01 220);
+  --secondary: oklch(0.20 0.015 220);
+  --secondary-foreground: oklch(0.88 0.008 40);
+  --muted: oklch(0.18 0.012 220);
+  --muted-foreground: oklch(0.58 0.01 220);
+  --accent: oklch(0.72 0.14 42);
+  --accent-foreground: oklch(0.10 0.01 220);
+  --destructive: oklch(0.58 0.15 15);
+  --destructive-foreground: oklch(0.95 0.005 40);
+  --border: oklch(0.22 0.015 220);
+  --input: oklch(0.22 0.015 220);
+  --ring: oklch(0.68 0.16 40);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.68 0.16 40);
+  --chart-2: oklch(0.60 0.13 220);
+  --chart-3: oklch(0.62 0.14 150);
+  --chart-4: oklch(0.65 0.12 280);
+  --chart-5: oklch(0.58 0.15 15);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.12 0.01 220);
+  --sidebar-foreground: oklch(0.95 0.005 40);
+  --sidebar-primary: oklch(0.68 0.16 40);
+  --sidebar-primary-foreground: oklch(0.10 0.01 220);
+  --sidebar-accent: oklch(0.72 0.14 42);
+  --sidebar-accent-foreground: oklch(0.10 0.01 220);
+  --sidebar-border: oklch(0.22 0.015 220);
+  --sidebar-ring: oklch(0.68 0.16 40);
+}
+
+@theme inline {
+  /* Shadcn Core Mapping */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Charts Mapping */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar Mapping */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-serif-display: var(--font-serif-display);
+  --font-mono: var(--font-mono);
+
+  /* Radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans min-h-screen;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif-display);
+    @apply font-normal tracking-tight;
+  }
+
+  a, button {
+    @apply transition-colors;
+  }
+
+  code, pre {
+    @apply font-mono;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40;
+  }
+}
