@@ -3,16 +3,16 @@ import { SiteLayout } from "@/components/SiteLayout";
 
 const areas = [
   {
-    title: "Strategy & AI Governance",
-    text: "Translating AI ambition into decisions, controls, and evidence leaders can use.",
+    title: "AI Validation & Governance",
+    text: "Building the evidence, processes, and oversight structures that make Agentic AI systems genuinely deployable, not just impressive in demos.",
   },
   {
-    title: "Marketing Psychology",
-    text: "Understanding how people decide, trust, adopt, resist, and change behaviour.",
+    title: "Enterprise Deployment Strategy",
+    text: "Translating AI capability into operating models that survive real use. From pilot to production, with the right controls in place.",
   },
   {
-    title: "Enterprise Deployment",
-    text: "Helping teams move from pilots to operating models that can survive real use.",
+    title: "Marketing Psychology & Narrative",
+    text: "Understanding how organisations actually adopt AI, and how to close the gap between technical confidence and institutional trust.",
   },
 ];
 
@@ -26,20 +26,30 @@ export default function About() {
           <h1 className="font-serif-display text-5xl leading-[1.02] md:text-7xl">I help enterprises understand whether their AI is ready to trust.</h1>
           <div className="mt-8 space-y-6 text-lg leading-8 text-muted-foreground">
             <p>
-              Priya Darshani is CEO and co-founder of TaskHived. Her work focuses on AI validation, governance, and the trust infrastructure enterprises need before they can deploy AI responsibly.
+              Priya Darshani is CEO and co-founder of TaskHived, an AI validation infrastructure company for enterprises deploying Agentic AI systems. She co-founded TaskHived with Devendra Kumar to close a specific gap: organisations are building AI capability faster than they are building the capacity to trust it.
             </p>
             <p>
-              She brings experience from McKinsey, IBM, and KDDI, with a background spanning strategy consulting, enterprise technology, and marketing psychology. Based in Singapore, she works at the point where business judgement, human behaviour, and AI systems meet.
+              Her background spans strategy consulting, enterprise technology at IBM and KDDI, and marketing psychology. She works at the intersection of how AI systems actually perform and how organisations actually make decisions about them. Based in Singapore, she advises enterprises across regulated industries on AI governance, deployment readiness, and the trust infrastructure that responsible AI requires.
             </p>
             <p>
-              Her perspective is practical. AI does not become valuable because it is impressive in a demo. It becomes valuable when people can evaluate it, govern it, improve it, and trust it inside real work.
+              Her perspective is direct. AI does not become valuable because it scores well on a benchmark. It becomes valuable when people can evaluate it, govern it, and trust it inside real work. The discipline of building that trust is what she writes and talks about.
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
-            <a href="https://www.linkedin.com/in/pdarshani/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-[1.02]">
+            <a
+              href="https://www.linkedin.com/in/pdarshani/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-[1.02]"
+            >
               LinkedIn <ArrowUpRight className="h-4 w-4" />
             </a>
-            <a href="https://taskhived.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold transition hover:border-primary hover:text-primary">
+            <a
+              href="https://taskhived.com"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold transition hover:border-primary hover:text-primary"
+            >
               TaskHived <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>

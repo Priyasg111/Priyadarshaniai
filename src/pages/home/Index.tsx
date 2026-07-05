@@ -16,7 +16,7 @@ const Index = () => {
               On AI, trust, and what it means to deploy responsibly.
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
-              I write about AI validation, enterprise deployment, and the gap between what AI can do and what enterprises can actually trust. Former McKinsey. Based in Singapore.
+              I write about AI validation, enterprise deployment readiness, and the infrastructure trust requires. Strategy consultant. Co-founder, TaskHived. Based in Singapore.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link to="/writing" className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-[1.02]">

@@ -28,7 +28,11 @@ export default function ArticleDetail() {
 
         {/* @section: article-hero-image */}
         <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <img src={article.heroImage} alt="Dark abstract editorial visual" className="h-[300px] w-full rounded-2xl border border-border object-cover md:h-[520px]" />
+          <img
+            src={article.heroImage}
+            alt={`Hero image for ${article.title}`}
+            className="h-[300px] w-full rounded-2xl border border-border object-cover md:h-[520px]"
+          />
         </div>
 
         {/* @section: article-body-with-toc */}
@@ -53,13 +57,22 @@ export default function ArticleDetail() {
                 <h2 className="mb-5 font-serif-display text-3xl leading-tight md:text-4xl">{section.title}</h2>
                 <div className="space-y-6 text-base leading-8 text-muted-foreground md:text-lg md:leading-9">
                   {section.paragraphs.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+                    <p key={paragraph.slice(0, 40)}>{paragraph}</p>
                   ))}
                 </div>
                 {section.quote && (
                   <blockquote className="my-8 border-l-2 border-primary pl-6 font-serif-display text-2xl leading-snug text-foreground md:text-3xl">
-                    “{section.quote}”
+                    "{section.quote}"
                   </blockquote>
+                )}
+                {section.midImage && (
+                  <div className="mt-8">
+                    <img
+                      src={section.midImage}
+                      alt={section.midImageAlt ?? "Editorial illustration"}
+                      className="h-64 w-full rounded-xl border border-border object-cover md:h-80"
+                    />
+                  </div>
                 )}
               </section>
             ))}
