@@ -12,7 +12,6 @@ const Index = () => {
         <div className="absolute left-1/2 top-0 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 md:grid-cols-[1.1fr_0.55fr] md:px-8 md:py-28 lg:gap-20">
           <div className="flex max-w-4xl flex-col justify-center">
-            <p className="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-primary">CEO, TaskHived · AI Validation Strategist</p>
             <h1 className="font-serif-display text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
               On AI, trust, and what it means to deploy responsibly.
             </h1>
@@ -32,7 +31,7 @@ const Index = () => {
             <div className="relative">
               <div className="absolute inset-0 rounded-full border border-primary/30" aria-hidden="true" />
               <img
-                src="/images/headshot_1.jpeg"
+                src="/images/priya-headshot.jpg"
                 alt="Priya Darshani"
                 className="relative h-64 w-64 rounded-full border border-border object-cover p-2 md:h-80 md:w-80"
               />
