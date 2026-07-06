@@ -173,7 +173,7 @@ export default function About() {
       <section className="mx-auto max-w-7xl px-5 pb-20 md:px-8 md:pb-28">
         <div className="max-w-4xl border-t border-border pt-10">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Beyond the work</p>
-          <h2 className="font-serif-display text-3xl leading-tight md:text-5xl">110 countries. One consistent question: what does it mean to trust?</h2>
+          <h2 className="font-serif-display text-3xl leading-tight md:text-5xl">110 countries. Five continents. One consistent question: what does it mean to trust?</h2>
           <div className="mt-8 space-y-6 text-lg leading-8 text-muted-foreground">
             <p>
               Priya has travelled to 110 countries, an experience that has shaped how she thinks about people, culture, systems, and trust. It reinforced a belief that sits at the centre of her work: intelligence is never purely technical. It is contextual, behavioural, and deeply human.
