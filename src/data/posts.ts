@@ -60,7 +60,7 @@ export const posts: Post[] = [
     date: "Oct 26, 2023",
     image: "/images/article_5.jpeg",
     excerpt:
-      "TaskHived exists to help teams move from impressive AI demos to systems they can evaluate, govern, improve, and deploy with confidence.",
+      "In regulated environments, the cost of a poorly deployed AI system is not just operational. It is reputational, legal, and deeply human. That changes what deployment readiness actually requires.",
     featured: true,
   },
   {
@@ -278,14 +278,14 @@ export const articles: Record<string, Article> = {
       },
       {
         id: "six-areas",
-        title: "Six areas I focus on",
+        title: "Six areas worth exploring",
         paragraphs: [
-          "AI validation and trust infrastructure: how organisations build the evidence, processes, and oversight structures that make Agentic AI systems genuinely deployable.",
+          "Evidence before deployment: how organisations build the structured evidence, processes, and oversight structures that make AI systems genuinely deployable rather than merely capable.",
           "Human evaluation as a discipline: not a grudging cost but a source of insight that automated systems cannot replicate, and a way of building institutional knowledge about how AI systems actually behave.",
-          "Narrative and communication: how to make AI validation legible to executives, boards, and regulators who need to make decisions without becoming technical experts.",
-          "The intersection of strategy and deployment: why deployment readiness is a strategic question as much as a technical one, and who should be at the table.",
+          "Communication and decision clarity: how to make deployment evidence legible to the executives, boards, and regulators who need to make decisions without becoming technical experts.",
+          "The intersection of strategy and deployment: why deployment readiness is a strategic question as much as a technical one, and who should be at the table when those decisions are made.",
           "Governance design: what effective oversight structures look like and how to build them without creating processes so burdensome they slow down everything useful.",
-          "Marketing psychology in enterprise AI adoption: how organisations move from awareness of AI capability to genuine institutional trust, and what gets in the way.",
+          "Organisational trust and adoption: how organisations move from awareness of AI capability to genuine institutional confidence, and what shapes that journey in practice.",
         ],
       },
     ],
@@ -346,22 +346,22 @@ export const articles: Record<string, Article> = {
     sections: [
       {
         id: "the-problem-we-solve",
-        title: "The problem we are solving",
+        title: "The problem worth solving",
         paragraphs: [
-          "TaskHived was founded on a specific observation: organisations are building AI faster than they are building the capacity to trust it. The gap is not capability. It is not ambition. It is the infrastructure required to evaluate, govern, and continuously validate AI systems in the context of real enterprise work.",
-          "That infrastructure does not exist off the shelf. It has to be built deliberately, with people who understand both the technical side of AI evaluation and the organisational side of enterprise deployment. That is what TaskHived does.",
+          "Regulated industries face a version of the AI deployment problem that is different in degree but not in kind from what every enterprise faces. The question is not whether AI can help. In most cases, it can. The question is whether an organisation can generate enough structured evidence to justify the deployment decision, defend it to regulators, and maintain confidence in it over time.",
+          "That infrastructure does not exist off the shelf. It has to be built deliberately, by people who understand both the technical side of AI evaluation and the organisational realities of enterprise deployment. TaskHived grew from an attempt to build it.",
         ],
       },
       {
         id: "what-we-build",
-        title: "What we build",
+        title: "What structured evidence looks like in practice",
         paragraphs: [
-          "TaskHived builds AI validation infrastructure for enterprises deploying Agentic AI systems. This includes structured evaluation frameworks, human-in-the-loop review processes, governance tooling, and the ongoing monitoring systems that allow organisations to maintain confidence in their AI deployments over time.",
-          "We work with organisations at different stages of their AI journey, from teams preparing to deploy their first production system to enterprises managing portfolios of AI systems across multiple business units. The common thread is the need for structured evidence: not just that the system works, but that it works well enough, in the right context, with the right controls.",
+          "Building deployment evidence in a regulated environment means combining structured human evaluation with clear governance processes and ongoing monitoring. It means documenting what a system was tested against, what it was not, where it performed well, and where its limits lie. It means making those limits legible to the people who are accountable for the deployment decision.",
+          "The common thread across every organisation we work with at TaskHived is the same: not just the need to know whether the system works, but whether it works well enough, in the right context, with the right controls, for the people and decisions it will affect.",
         ],
         midImage: "/images/article_1.jpeg",
         midImageAlt: "Abstract visual representing trust infrastructure and system reliability",
-        quote: "We are not in the business of making AI sound safe. We are in the business of making it actually trustworthy.",
+        quote: "The goal is not to make AI sound safe. It is to generate the kind of evidence that makes a deployment decision genuinely defensible.",
       },
       {
         id: "why-it-matters-now",

@@ -169,6 +169,58 @@ export default function About() {
         </div>
       </section>
 
+      {/* @section: about-selected-media */}
+      <section className="mx-auto max-w-7xl px-5 pb-16 md:px-8 md:pb-20">
+        <div className="max-w-4xl border-t border-border pt-10">
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Selected Media</p>
+          <p className="mb-6 text-sm leading-7 text-muted-foreground">Earlier public commentary and industry contributions from Priya Darshani.</p>
+          <ul className="space-y-4">
+            <li>
+              <a
+                href="https://www.brandinginasia.com/getting-high-on-supply-managing-media-buy-strategies/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-3"
+              >
+                <span className="mt-1 shrink-0 text-primary">→</span>
+                <span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Branding in Asia</span>
+                  <span className="mt-1 block text-sm leading-6 text-foreground transition group-hover:text-primary">Getting High on Supply: Managing Media Buy Strategies</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://paulwriter.com/marketing-maverick-priya-darshani-head-of-marketing-japac-mediamath-apacleaders/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-3"
+              >
+                <span className="mt-1 shrink-0 text-primary">→</span>
+                <span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Paul Writer</span>
+                  <span className="mt-1 block text-sm leading-6 text-foreground transition group-hover:text-primary">Marketing Maverick: Priya Darshani, Head of Marketing JAPAC, MediaMath</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://paulwriter.com/key-marketing-trends-that-will-shape-the-technology-sector-in-2019/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-3"
+              >
+                <span className="mt-1 shrink-0 text-primary">→</span>
+                <span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Paul Writer</span>
+                  <span className="mt-1 block text-sm leading-6 text-foreground transition group-hover:text-primary">Key Marketing Trends That Will Shape the Technology Sector in 2019</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       {/* @section: about-beyond-work */}
       <section className="mx-auto max-w-7xl px-5 pb-20 md:px-8 md:pb-28">
         <div className="max-w-4xl border-t border-border pt-10">
