@@ -2,6 +2,7 @@ export type Post = {
   title: string;
   slug: string;
   date: string;
+  updatedDate?: string;
   excerpt: string;
   image: string;
   featured?: boolean;
@@ -25,7 +26,7 @@ export const posts: Post[] = [
   {
     title: "The AI Trust Gap: Why Capability Is Moving Faster Than Confidence",
     slug: "ai-trust-gap-capability-faster-than-confidence",
-    date: "Dec 11, 2023",
+    date: "Mar 14, 2025",
     image: "/images/art_a_2.jpeg",
     excerpt:
       "AI validation is not a technical checkpoint. It is the discipline that decides whether an organisation can trust a system enough to put it in front of customers, employees, and regulators.",
@@ -33,7 +34,7 @@ export const posts: Post[] = [
   {
     title: "Why Human Judgment Still Matters in AI Evaluation",
     slug: "why-human-judgment-matters-ai-evaluation",
-    date: "Dec 01, 2023",
+    date: "Jul 08, 2025",
     image: "/images/art_c_1.jpeg",
     excerpt:
       "Automated benchmarks are useful. They cannot tell you whether an AI system behaves well inside the messy reality of enterprise work.",
@@ -41,7 +42,7 @@ export const posts: Post[] = [
   {
     title: "What Enterprises Should Measure Before Deploying AI Agents",
     slug: "what-enterprises-should-measure-before-deploying-ai-agents",
-    date: "Nov 15, 2023",
+    date: "Sep 22, 2025",
     image: "/images/art_d_2.jpeg",
     excerpt:
       "Validation is not a pass-or-fail stamp. It is a structured way to understand performance, limits, risk, and readiness across real use cases.",
@@ -49,7 +50,8 @@ export const posts: Post[] = [
   {
     title: "Agentic AI Needs Validation Infrastructure, Not Just Governance Documents",
     slug: "agentic-ai-needs-validation-infrastructure",
-    date: "Oct 12, 2023",
+    date: "Nov 11, 2025",
+    updatedDate: "Jul 2026",
     image: "/images/art_e_2.jpeg",
     excerpt:
       "The honest version of AI validation starts with uncomfortable questions. What can fail, who notices, and what happens next?",
@@ -57,7 +59,8 @@ export const posts: Post[] = [
   {
     title: "Why Regulated Industries Cannot Treat AI Validation as a Checkbox",
     slug: "regulated-industries-ai-validation-not-a-checkbox",
-    date: "Oct 26, 2023",
+    date: "Apr 09, 2026",
+    updatedDate: "Jul 2026",
     image: "/images/article_5.jpeg",
     excerpt:
       "In regulated environments, the cost of a poorly deployed AI system is not just operational. It is reputational, legal, and deeply human. That changes what deployment readiness actually requires.",
@@ -66,7 +69,7 @@ export const posts: Post[] = [
   {
     title: "The Difference Between AI Safety, AI Security, and AI Trust",
     slug: "difference-ai-safety-security-trust",
-    date: "Sep 15, 2023",
+    date: "Jan 20, 2026",
     image: "/images/art_f_1.jpeg",
     excerpt:
       "Strategy, AI validation, behavioural science, enterprise deployment, governance, and trust. These are the six lenses I keep returning to.",
@@ -76,7 +79,7 @@ export const posts: Post[] = [
 export const featuredHomePost: Post = {
   title: "From AI Demo to Deployment: What Readiness Actually Requires",
   slug: "from-ai-demo-to-deployment-readiness",
-  date: "Sep 28, 2023",
+  date: "May 19, 2025",
   image: "/images/art_b_1.jpeg",
   excerpt:
     "Most enterprises don't have an AI problem. They have a trust problem. The gap between what AI systems can do and what organisations are prepared to deploy is widening, and the cost of that gap is real.",

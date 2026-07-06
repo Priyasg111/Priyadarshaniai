@@ -22,7 +22,12 @@ export default function ArticleDetail() {
           <div className="max-w-4xl">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-primary">{article.date}</p>
             <h1 className="font-serif-display text-5xl leading-[1.02] md:text-7xl">{article.title}</h1>
-            <p className="mt-6 text-sm text-muted-foreground">Priya Darshani · {article.date}</p>
+            <p className="mt-6 text-sm text-muted-foreground">
+              Priya Darshani · {article.date}
+              {article.updatedDate && (
+                <span className="ml-3 text-muted-foreground/60">· Updated: {article.updatedDate}</span>
+              )}
+            </p>
           </div>
         </header>
 
