@@ -16,13 +16,9 @@ export default function Writing() {
       <section className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
         <div className="max-w-4xl">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Writing</p>
-          <h1 className="font-serif-display text-5xl leading-tight md:text-7xl">Writing</h1>
+          <h1 className="font-serif-display text-5xl leading-tight md:text-7xl">Essays on trust, judgement and the future of AI deployment.</h1>
           <div className="mt-7 max-w-2xl space-y-5 text-lg leading-8 text-muted-foreground">
-            <p>I write to better understand one of the defining questions of our time:</p>
-            <p>How should humans and artificial intelligence make decisions together?</p>
-            <p>Rather than following AI news or reviewing individual models, I focus on the broader ideas that will remain relevant long after today's technology changes.</p>
-            <p>My writing explores trust, judgement, deployment, human expertise, organisational behaviour and the evolving relationship between people and intelligent systems.</p>
-            <p>Each essay is an attempt to clarify a question rather than declare a final answer.</p>
+            <p>I write about the questions that organisations face as artificial intelligence moves from impressive demonstrations to real-world decisions. My work explores trust, human judgement, deployment readiness, enterprise adoption and how organisations build confidence in AI.</p>
           </div>
         </div>
       </section>

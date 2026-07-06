@@ -64,6 +64,14 @@ export const posts: Post[] = [
     image: "/images/article_5.jpeg",
     excerpt:
       "In regulated environments, the cost of a poorly deployed AI system is not just operational. It is reputational, legal, and deeply human. That changes what deployment readiness actually requires.",
+  },
+  {
+    title: "The Missing Infrastructure for AI",
+    slug: "missing-infrastructure-for-ai",
+    date: "Jun 23, 2026",
+    image: "/images/art_a_1.jpeg",
+    excerpt:
+      "Why measuring models is no longer enough, and why the future of AI depends on better ways of measuring human judgement, trust and deployment readiness.",
     featured: true,
   },
   {
@@ -373,6 +381,62 @@ export const articles: Record<string, Article> = {
           "The stakes are rising. Agentic AI systems, systems that can take actions autonomously over extended sequences, represent a step change in both capability and risk. The validation approaches that were adequate for a content generation tool are not adequate for a system that can execute business processes, make purchasing decisions, or interact with external systems on behalf of an organisation.",
           "The organisations that build robust validation infrastructure now will be the ones that can deploy Agentic AI at scale with confidence. The ones that don't will face mounting post-deployment failures, regulatory exposure, and the kind of internal trust collapse that sets AI programmes back by years.",
           "TaskHived is building the infrastructure that makes the former outcome achievable. That is the work.",
+        ],
+      },
+    ],
+  },
+
+  /* ─── Article H (Flagship) ─── */
+  "missing-infrastructure-for-ai": {
+    ...posts[5],
+    heroImage: "/images/art_a_1.jpeg",
+    sections: [
+      {
+        id: "measuring-the-wrong-thing",
+        title: "We have been measuring the wrong thing",
+        paragraphs: [
+          "For the past decade, progress in artificial intelligence has been measured primarily through benchmarks. Models are tested on standardised tasks. Scores are published. Rankings are updated. Each new release claims to surpass the last on some dimension of capability.",
+          "This has been useful. Benchmarks created shared vocabulary, enabled comparison, and pushed the field forward. But something important has been left out.",
+          "Benchmarks tell you what a model can do under controlled conditions. They say very little about whether an organisation is ready to trust that model in real decisions, with real consequences, for real people.",
+          "That is a different question entirely. And most of the infrastructure for answering it does not yet exist.",
+        ],
+        quote: "Benchmarks measure capability. Deployment requires trust. These are not the same thing.",
+      },
+      {
+        id: "the-deployment-gap",
+        title: "The gap between capability and deployment",
+        paragraphs: [
+          "Talk to anyone responsible for deploying AI inside a large organisation and you will hear a version of the same story. The technology is impressive. The demo was convincing. But somewhere between the prototype and production, the confidence disappeared.",
+          "The system performed well on the test data. It struggled on the edge cases that matter most to the business. The evaluation process was designed to confirm readiness, not to surface doubt. The people most affected by the system were not involved in assessing it. And nobody was quite sure who owned the decision to proceed.",
+          "This is not a story about bad technology. It is a story about missing infrastructure.",
+          "When organisations deploy physical infrastructure, they rely on engineering standards, safety certifications, independent inspection, and structured accountability. These systems exist because the consequences of failure are significant and the people responsible for decisions need structured evidence before they can act responsibly.",
+          "AI deployment needs something similar. Not identical, but equivalent in spirit: structured ways of generating, reviewing, and communicating evidence about whether an AI system is ready for a specific use, in a specific context, with a specific level of risk.",
+        ],
+        midImage: "/images/art_a_2.jpeg",
+        midImageAlt: "Abstract representation of evidence gathering and structured evaluation",
+      },
+      {
+        id: "human-judgement-infrastructure",
+        title: "The missing piece is human judgement infrastructure",
+        paragraphs: [
+          "The infrastructure most organisations are missing is not better AI. It is better human judgement infrastructure.",
+          "By this I mean the systems, processes and evidence frameworks that allow organisations to incorporate human expertise into AI deployment decisions in a structured, scalable and defensible way.",
+          "Human judgement infrastructure asks different questions than automated evaluation. Not just: does this system produce accurate outputs? But: does this output reflect the knowledge of people who understand this domain? Does this decision account for context that the model cannot see? Has this use case been evaluated by people who understand the consequences of being wrong?",
+          "These questions require people. They require domain experts who can assess outputs in context. They require frontline workers who can identify the gap between the workflow a system assumes and the workflow they actually use. They require governance processes that treat human evaluation as evidence rather than as a cost.",
+          "Most organisations have not built this. The result is that AI deployment decisions are made on the basis of benchmark scores and technical metrics, with little systematic input from the people whose judgement is most relevant.",
+        ],
+        quote: "The missing infrastructure is not more compute. It is better ways of incorporating what humans know into AI deployment decisions.",
+      },
+      {
+        id: "what-this-looks-like",
+        title: "What this looks like in practice",
+        paragraphs: [
+          "Building human judgement infrastructure means thinking carefully about how expertise is collected, structured and applied at the moments that matter. It means designing evaluation processes that surface real doubt rather than confirming predetermined answers. It means creating feedback loops between the people affected by AI decisions and the people responsible for making them.",
+          "It also means being honest about what remains uncertain. One of the most important things human judgement can contribute to AI deployment is a clear statement of what the system has not been tested on, and where confidence should be limited. This is uncomfortable. It is also essential.",
+          "At TaskHived, this is the problem we are working on. Not building more capable AI, but building better infrastructure for the human side of deployment: the evaluation, the evidence, the accountability, and the trust.",
+          "I do not think this work is finished. I am not sure any single organisation will finish it. But it seems to me to be one of the most important practical questions in AI right now, and one that deserves more attention than benchmarks and leaderboards can give it.",
+          "What would it look like if organisations took human judgement as seriously as they take model performance? What evidence would they collect? What processes would they build? What would they learn?",
+          "These are the questions I keep coming back to.",
         ],
       },
     ],
