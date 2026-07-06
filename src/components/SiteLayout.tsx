@@ -105,7 +105,8 @@ export function FooterCta() {
       <section className="mx-auto grid max-w-7xl gap-8 px-5 py-14 md:grid-cols-[1fr_0.9fr] md:px-8 md:py-20">
         <div>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Get in touch</p>
-          <h2 className="font-serif-display text-3xl leading-tight md:text-5xl">For speaking, partnerships, or conversations on AI validation and deployment readiness, get in touch.</h2>
+          <h2 className="font-serif-display text-3xl leading-tight md:text-5xl">Let's build AI people can trust.</h2>
+          <p className="mt-4 text-lg leading-8 text-muted-foreground">If you're working on trustworthy AI, enterprise deployment, human evaluation, governance, decision science or the future of human-AI collaboration, I'd love to continue the conversation.</p>
         </div>
         <form
           className="flex h-fit gap-2 self-end rounded-full border border-border bg-background p-2"

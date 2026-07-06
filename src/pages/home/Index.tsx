@@ -6,10 +6,12 @@ import { WhitepaperGateModal, useWhitepaperGate } from "@/components/WhitepaperG
 import { posts } from "@/data/posts";
 
 const writingThemes = [
-  "AI Validation Infrastructure",
-  "Agentic AI Governance",
-  "Human Evaluation",
-  "Deployment Readiness",
+  "Human Judgement",
+  "AI Deployment Readiness",
+  "AI Assurance",
+  "Enterprise Trust",
+  "Decision Quality",
+  "Human-in-the-Loop",
 ];
 
 const Index = () => {
@@ -25,18 +27,18 @@ const Index = () => {
         <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-20 md:grid-cols-[1.15fr_0.5fr] md:px-8 md:py-28 lg:gap-20">
           <div className="flex max-w-4xl flex-col justify-center">
             <h1 className="font-serif-display text-5xl leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
-              AI capability is moving faster than AI trust.
+              Understanding when artificial intelligence deserves human trust.
             </h1>
             <div className="mt-8 space-y-4 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
-              <p>I'm Priya Darshani, CEO and co-founder of TaskHived, an AI validation infrastructure company for enterprises deploying Agentic AI systems.</p>
-              <p>My work focuses on a specific problem: organisations are building AI capability faster than they are building the capacity to evaluate, govern, and trust it inside real work.</p>
+              <p>Artificial intelligence is changing how the world makes decisions. Yet organisations still struggle to answer a fundamental question: when should those decisions be trusted?</p>
+              <p>My work explores how we measure human judgement alongside machine capability so AI can be deployed with greater confidence, accountability and real-world value.</p>
             </div>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link to="/writing" className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-[1.02]">
-                Read the writing <ArrowRight className="ml-2 h-4 w-4" />
+                Explore my work <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
               <Link to="/about" className="inline-flex items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition hover:border-primary hover:text-primary">
-                About Priya
+                What I'm building
               </Link>
             </div>
           </div>
@@ -59,13 +61,16 @@ const Index = () => {
           <p className="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-primary">My thesis</p>
           <div className="grid gap-12 lg:grid-cols-[minmax(0,680px)_1fr]">
             <div className="space-y-5 text-lg leading-8 text-muted-foreground">
-              <p>I write about AI validation, deployment readiness, human judgment, governance, and the trust infrastructure required for responsible AI adoption.</p>
-              <p>Before TaskHived, my background spanned strategy consulting, enterprise technology at IBM and KDDI, and marketing psychology. That combination shaped how I think about AI: not only as a technical system, but as something organisations must understand, measure, explain, and trust before they can responsibly deploy it.</p>
-              <p>I've travelled to 110 countries, which has deeply shaped how I think about culture, behaviour, risk, and decision-making. Meditation is also central to my life. It keeps me grounded in the belief that intelligence is not only about speed, scale, or automation. It is also about awareness, judgment, and responsibility.</p>
+              <p>For decades we have measured technological progress by making machines faster, more accurate and more capable.</p>
+              <p>Artificial intelligence has accelerated that progress even further. Today's models can reason, generate, summarise and automate work at a remarkable scale.</p>
+              <p>But capability alone is not the same as trust.</p>
+              <p>Organisations deploying AI still face questions that benchmarks cannot answer.</p>
+              <p>When should a human intervene? What evidence is enough before deployment? How should judgement be evaluated? How do we know whether an AI system is ready for real-world use?</p>
+              <p>These questions sit at the intersection of technology and human decision-making. They are the questions that increasingly shape my work.</p>
             </div>
             <blockquote className="flex items-center border-l-2 border-primary pl-8 lg:border-l-0 lg:border-t-2 lg:pl-0 lg:pt-8">
               <p className="font-serif-display text-2xl leading-snug text-foreground lg:text-3xl">
-                AI does not become valuable because it performs well in a demo or scores well on a benchmark. It becomes valuable when people can evaluate it, govern it, and trust it inside real work. That is the discipline I write about.
+                Capability tells us what AI can do. Deployment determines whether AI should be trusted. Closing that gap is the work that matters.
               </p>
             </blockquote>
           </div>
@@ -75,12 +80,12 @@ const Index = () => {
       {/* @section: home-building-taskhived */}
       <section className="border-b border-border bg-card/40">
         <div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Building TaskHived</p>
-          <h2 className="font-serif-display text-3xl leading-tight md:text-5xl">Validation infrastructure for enterprise Agentic AI</h2>
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">What I'm Building</p>
+          <h2 className="font-serif-display text-3xl leading-tight md:text-5xl">Building infrastructure for human judgement in AI deployment.</h2>
           <div className="mt-8 grid gap-6 text-lg leading-8 text-muted-foreground lg:grid-cols-3">
-            <p>I co-founded TaskHived to build validation infrastructure for enterprises deploying Agentic AI systems.</p>
-            <p>As AI systems become more autonomous, the question is no longer only whether they can generate useful outputs. The question is whether organisations can understand how they behave, where they fail, when they need human oversight, and whether they are ready to be trusted in real workflows.</p>
-            <p>TaskHived focuses on structured human evaluation, behavioural testing, deployment-readiness evidence, and the trust infrastructure required to move AI from prototype to responsible adoption.</p>
+            <p>The AI industry has developed sophisticated ways to measure machines. We benchmark reasoning. We compare models. We evaluate performance.</p>
+            <p>Yet far less attention has been given to measuring the human side of AI deployment. How should human judgement be incorporated? How should expertise be captured? How should confidence, disagreement and context influence decisions?</p>
+            <p>TaskHived is my attempt to help answer those questions by building infrastructure that combines structured human evaluation with evidence-driven AI deployment. This work is still evolving, but the mission is clear: build better ways for humans and AI to make decisions together.</p>
           </div>
           <a
             href="https://taskhived.com"
@@ -88,7 +93,7 @@ const Index = () => {
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-primary transition hover:gap-3"
           >
-            Learn more at taskhived.com <ExternalLink className="h-4 w-4" />
+            Learn about TaskHived <ExternalLink className="h-4 w-4" />
           </a>
         </div>
       </section>
@@ -111,8 +116,8 @@ const Index = () => {
       <section className="mx-auto max-w-7xl px-5 pb-10 pt-16 md:px-8 md:pt-24">
         <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Featured essays</p>
-            <h2 className="font-serif-display text-3xl md:text-5xl">Writing on AI validation, governance, and trust.</h2>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Writing</p>
+            <h2 className="font-serif-display text-3xl md:text-5xl">Exploring the practical questions surrounding AI deployment.</h2>
           </div>
           <Link to="/writing" className="inline-flex items-center text-sm font-medium text-primary">
             View all writing <ArrowRight className="ml-2 h-4 w-4" />
