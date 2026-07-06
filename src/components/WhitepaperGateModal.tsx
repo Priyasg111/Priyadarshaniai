@@ -79,7 +79,7 @@ export function WhitepaperGateModal({ onClose }: Props) {
           Download the White Paper
         </h2>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">
-          Deploying AI in Regulated Industries Without Breaking Compliance — A 10-Week Framework.
+          Deploying AI in Regulated Industries Without Breaking Compliance: A 10-Week Framework.
         </p>
 
         <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">

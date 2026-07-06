@@ -135,7 +135,7 @@ export function FooterCta() {
       {/* @section: footer-attribution */}
       <div className="border-t border-border/50 px-5 py-5 md:px-8">
         <p className="mx-auto max-w-7xl text-xs text-muted-foreground">
-          Priya Darshani — CEO &amp; Co-founder, TaskHived. Writing on AI validation, Agentic AI, human judgment, and enterprise trust infrastructure.
+          Priya Darshani. Exploring how organisations determine whether artificial intelligence deserves human trust.
         </p>
       </div>
     </footer>
