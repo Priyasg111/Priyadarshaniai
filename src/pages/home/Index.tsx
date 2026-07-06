@@ -1,4 +1,4 @@
-import { ArrowDownToLine, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowDownToLine, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PostCard } from "@/components/PostCard";
 import { SiteLayout } from "@/components/SiteLayout";
@@ -81,11 +81,15 @@ const Index = () => {
       <section className="border-b border-border bg-card/40">
         <div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">What I'm Building</p>
-          <h2 className="font-serif-display text-3xl leading-tight md:text-5xl">Building infrastructure for human judgement in AI deployment.</h2>
-          <div className="mt-8 grid gap-6 text-lg leading-8 text-muted-foreground lg:grid-cols-3">
-            <p>The AI industry has developed sophisticated ways to measure machines. We benchmark reasoning. We compare models. We evaluate performance.</p>
-            <p>Yet far less attention has been given to measuring the human side of AI deployment. How should human judgement be incorporated? How should expertise be captured? How should confidence, disagreement and context influence decisions?</p>
-            <p>TaskHived is my attempt to help answer those questions by building infrastructure that combines structured human evaluation with evidence-driven AI deployment. This work is still evolving, but the mission is clear: build better ways for humans and AI to make decisions together.</p>
+          <div className="mt-8 space-y-5 max-w-3xl text-lg leading-8 text-muted-foreground">
+            <p>Artificial intelligence is becoming part of how organisations make decisions.</p>
+            <p>As that happens, one question becomes increasingly important.</p>
+            <p>How do we determine whether an AI system deserves human trust before it is deployed?</p>
+            <p>That question sits at the centre of what I'm building.</p>
+            <p>I am the CEO and co-founder of TaskHived, a company exploring how organisations evaluate AI systems before they become part of real-world decisions.</p>
+            <p>Rather than focusing only on model capability, our work explores how structured human judgement, evaluation and evidence can help organisations deploy AI with greater confidence.</p>
+            <p>TaskHived is one practical expression of a broader question that continues to shape my work:</p>
+            <p>How should humans and artificial intelligence make better decisions together?</p>
           </div>
           <a
             href="https://taskhived.com"
@@ -93,7 +97,7 @@ const Index = () => {
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-primary transition hover:gap-3"
           >
-            Learn about TaskHived <ExternalLink className="h-4 w-4" />
+            Visit TaskHived <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </section>

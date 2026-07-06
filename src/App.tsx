@@ -6,6 +6,7 @@ import About from "./pages/About";
 import ArticleDetail from "./pages/ArticleDetail";
 import Index from "./pages/home/Index";
 import NotFound from "./pages/not-found/Index";
+import TaskHived from "./pages/TaskHived";
 import Writing from "./pages/Writing";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/writing" element={<Writing />} />
           <Route path="/writing/:slug" element={<ArticleDetail />} />
           <Route path="/about" element={<About />} />
+          <Route path="/taskhived" element={<TaskHived />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
