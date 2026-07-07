@@ -1,11 +1,82 @@
+import { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { SiteLayout } from "@/components/SiteLayout";
 import { getArticle } from "@/data/posts";
+import { useSEO } from "@/hooks/useSEO";
 
 export default function ArticleDetail() {
   const { slug } = useParams();
   const article = getArticle(slug);
+
+  const ogImage = article?.heroImage
+    ? `https://priyadarshani.ai${article.heroImage.startsWith('/') ? '' : '/'}${article.heroImage}`
+    : 'https://priyadarshani.ai/images/priya-headshot.jpg';
+
+  useSEO(
+    article
+      ? {
+          title: `${article.title} | Priya Darshani`,
+          description: article.excerpt,
+          canonical: `https://priyadarshani.ai/writing/${article.slug}`,
+          ogTitle: article.title,
+          ogDescription: article.excerpt,
+          ogImage,
+          ogType: 'article',
+          articlePublishedTime: article.date,
+          articleModifiedTime: article.updatedDate || article.date,
+        }
+      : {
+          title: 'Writing | Priya Darshani',
+          description: 'Essays on trust, judgement and the future of AI deployment.',
+          canonical: 'https://priyadarshani.ai/writing',
+        }
+  );
+
+  // Inject Article JSON-LD, replaced on each article navigation
+  useEffect(() => {
+    if (!article) return;
+
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": article.title,
+      "description": article.excerpt,
+      "author": {
+        "@type": "Person",
+        "name": "Priya Darshani",
+        "url": "https://priyadarshani.ai/about",
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Priya Darshani",
+        "url": "https://priyadarshani.ai",
+      },
+      "datePublished": article.date,
+      "dateModified": article.updatedDate || article.date,
+      "url": `https://priyadarshani.ai/writing/${article.slug}`,
+      "image": ogImage,
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://priyadarshani.ai/writing/${article.slug}`,
+      },
+    };
+
+    let el = document.getElementById('article-jsonld') as HTMLScriptElement | null;
+    if (!el) {
+      el = document.createElement('script');
+      el.id = 'article-jsonld';
+      el.type = 'application/ld+json';
+      document.head.appendChild(el);
+    }
+    el.textContent = JSON.stringify(jsonLd, null, 2);
+
+    return () => {
+      // Remove on unmount so it doesn't linger on non-article pages
+      const existing = document.getElementById('article-jsonld');
+      if (existing) existing.remove();
+    };
+  }, [article, ogImage]);
 
   if (!article) {
     return <Navigate to="/writing" replace />;

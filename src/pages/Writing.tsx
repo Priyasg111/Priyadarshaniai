@@ -3,8 +3,19 @@ import { PostCard } from "@/components/PostCard";
 import { SiteLayout } from "@/components/SiteLayout";
 import { WhitepaperGateModal, useWhitepaperGate } from "@/components/WhitepaperGateModal";
 import { posts } from "@/data/posts";
+import { useSEO } from "@/hooks/useSEO";
 
 export default function Writing() {
+  useSEO({
+    title: 'Writing | Priya Darshani',
+    description: 'Essays by Priya Darshani on trust, human judgement, AI deployment readiness, enterprise AI adoption and how organisations build confidence in AI systems.',
+    canonical: 'https://priyadarshani.ai/writing',
+    ogTitle: 'Writing | Priya Darshani',
+    ogDescription: 'Essays on trust, judgement and the future of AI deployment.',
+    ogImage: 'https://priyadarshani.ai/images/priya-headshot.jpg',
+    ogType: 'website',
+  });
+
   const featured = posts.find((post) => post.featured) ?? posts[0];
   const { open, setOpen, triggerDownload } = useWhitepaperGate();
 

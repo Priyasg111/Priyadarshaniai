@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { useSEO } from "@/hooks/useSEO";
 
 const areas = [
   {
@@ -17,6 +18,16 @@ const areas = [
 ];
 
 export default function About() {
+  useSEO({
+    title: 'About Priya Darshani | Human Trust and AI Deployment',
+    description: 'Priya Darshani is the CEO and co-founder of TaskHived. Her work explores how organisations determine whether artificial intelligence deserves human trust before deployment.',
+    canonical: 'https://priyadarshani.ai/about',
+    ogTitle: 'About Priya Darshani',
+    ogDescription: 'Exploring how organisations determine whether artificial intelligence deserves human trust before deployment.',
+    ogImage: 'https://priyadarshani.ai/images/priya-headshot.jpg',
+    ogType: 'profile',
+  });
+
   return (
     <SiteLayout>
       {/* @section: about-hero */}

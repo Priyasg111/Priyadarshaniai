@@ -9,7 +9,7 @@ export function PostCard({ post, large = false }: { post: Post; large?: boolean 
       <Link to={`/writing/${post.slug}`} className="block overflow-hidden bg-muted">
         <img
           src={post.image}
-          alt="Dark editorial abstract visual"
+          alt={`Editorial visual for: ${post.title}`}
           className={`w-full object-cover transition duration-500 group-hover:scale-105 ${large ? "h-72 md:h-full" : "h-52"}`}
           loading={large ? "eager" : "lazy"}
         />
