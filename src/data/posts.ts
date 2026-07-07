@@ -5,6 +5,9 @@ export type Post = {
   updatedDate?: string;
   excerpt: string;
   image: string;
+  category?: string;
+  author?: string;
+  readTime?: string;
   featured?: boolean;
 };
 
@@ -81,6 +84,18 @@ export const posts: Post[] = [
     image: "/images/art_f_1.jpeg",
     excerpt:
       "Strategy, AI validation, behavioural science, enterprise deployment, governance, and trust. These are the six lenses I keep returning to.",
+  },
+  {
+    title: "Beyond Benchmarks: Why AI Needs Better Evidence Before Deployment",
+    slug: "beyond-benchmarks-evidence-before-deployment",
+    date: "Jul 07, 2026",
+    image: "/images/art_d_2.jpeg",
+    excerpt:
+      "Benchmarks tell us what AI can do. Organisations need to know whether to trust it. That distinction is becoming one of the most consequential questions in enterprise AI.",
+    category: "Deployment Readiness",
+    author: "Priya Darshani",
+    readTime: "8 min read",
+    featured: false,
   },
 ];
 
@@ -437,6 +452,51 @@ export const articles: Record<string, Article> = {
           "I do not think this work is finished. I am not sure any single organisation will finish it. But it seems to me to be one of the most important practical questions in AI right now, and one that deserves more attention than benchmarks and leaderboards can give it.",
           "What would it look like if organisations took human judgement as seriously as they take model performance? What evidence would they collect? What processes would they build? What would they learn?",
           "These are the questions I keep coming back to.",
+        ],
+      },
+    ],
+  },
+
+  /* ─── Article I ─── */
+  "beyond-benchmarks-evidence-before-deployment": {
+    ...posts[7],
+    heroImage: "/images/art_d_2.jpeg",
+    sections: [
+      {
+        id: "the-gap-no-benchmark-captures",
+        title: "The gap no benchmark captures",
+        paragraphs: [
+          "Artificial intelligence has entered an extraordinary period of progress. In just three years, generative AI has reached 53% population-level adoption, faster than both the personal computer and the internet, while 88% of organisations now report using AI in at least one business function. Frontier models continue to improve across reasoning, coding and scientific tasks, and some now perform at or above human baselines on increasingly complex benchmarks.",
+          "Yet the most important conclusion in the Stanford AI Index 2026 is not about how quickly AI is advancing. It is about how slowly the systems around it are adapting. Governance frameworks, evaluation methods, transparency, and the infrastructure needed to measure AI's real-world impact are failing to evolve at the same speed as the technology itself.",
+          "For years, progress in AI has been measured through benchmarks. Can a model solve complex mathematics? Can it generate software? Can it outperform experts on professional examinations? These benchmarks have been essential in accelerating research and comparing technical capability, but they answer only one question: what can a model do under controlled conditions? They do not answer the question every organisation eventually faces: should we trust this system enough to rely on it?",
+          "Benchmarks measure capability. Organisations deploy trust.",
+        ],
+      },
+      {
+        id: "where-confidence-breaks-down",
+        title: "Where confidence breaks down",
+        paragraphs: [
+          "This gap between technical performance and real-world deployment is becoming more apparent as AI systems move beyond demonstrations and into critical environments. A legal assistant that hallucinates case law, a clinical system that performs well on exam-style questions but struggles with real patient data, or an AI agent that performs impressively in testing yet behaves inconsistently in production all reveal the same underlying problem. Intelligence alone is no longer the limiting factor. Confidence is.",
+          "The Stanford AI Index highlights this shift. While capability benchmarks continue to improve, responsible AI benchmarking remains sparse. Documented AI incidents increased from 233 in 2024 to 362 in 2025. Many frontier models have become less transparent, with leading developers disclosing less about training data, model architecture and evaluation. Benchmarks themselves are beginning to lose their usefulness as models rapidly saturate tests that were expected to remain challenging for years.",
+          "These are not isolated trends. Together they point to a deeper issue. We are becoming remarkably good at building intelligent systems while becoming comparatively less capable of understanding when those systems deserve our trust.",
+        ],
+      },
+      {
+        id: "deployment-is-a-human-decision",
+        title: "Deployment is a human decision",
+        paragraphs: [
+          "Organisations do not simply ask whether AI can produce an answer. They ask whether that answer is reliable enough to influence decisions that affect customers, patients, employees or citizens. They need to understand how AI behaves under uncertainty, how consistently experts agree with its outputs, where confidence breaks down, how context changes performance and what level of risk is acceptable within their own industry.",
+          "Ironically, as AI becomes more intelligent, human judgment becomes more valuable, not less. Every deployment decision still depends on people deciding whether an output is acceptable, whether a recommendation is safe, whether an exception should be escalated and whether the consequences of being wrong are tolerable. Human judgment remains the mechanism through which organisations translate technical capability into practical trust. Yet today, that judgment is often informal, inconsistent and difficult to measure.",
+        ],
+      },
+      {
+        id: "the-infrastructure-that-comes-next",
+        title: "The infrastructure that comes next",
+        paragraphs: [
+          "The next generation of AI infrastructure will not emerge through another leap in model size or benchmark performance. It will emerge through better ways of generating evidence for deployment decisions. Organisations need systems that make expert judgment structured, measurable, auditable and repeatable. They need evidence that reflects how AI performs in the environments where it will actually operate, under the oversight of the people responsible for deploying it.",
+          "Human-in-the-loop should not be viewed merely as a safety checkpoint or manual review process. It should become an integral part of how organisations evaluate AI before deployment, transforming human expertise into evidence that improves confidence rather than simply correcting errors after they occur. In this model, human judgment is not the opposite of artificial intelligence. It is the infrastructure that allows artificial intelligence to be deployed responsibly at scale.",
+          "As AI becomes embedded across healthcare, finance, law, education, government and critical infrastructure, the organisations that succeed will not necessarily be those with access to the most powerful models. They will be those with the strongest evidence supporting how, where and under what conditions those models should be trusted.",
+          "The question that increasingly guides my work is no longer: How intelligent is this model? It is: What evidence do we need before we trust it? The answer to that question will shape the future of enterprise AI far more than the next benchmark ever will.",
         ],
       },
     ],
