@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const navItems = [
-  { label: "Writing", href: "/writing" },
+  { label: "Essays", href: "/writing" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "mailto:priya@taskhived.com" },
 ];

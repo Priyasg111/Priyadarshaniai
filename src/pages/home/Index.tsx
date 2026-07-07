@@ -124,7 +124,7 @@ const Index = () => {
             <h2 className="font-serif-display text-3xl md:text-5xl">Exploring the practical questions surrounding AI deployment.</h2>
           </div>
           <Link to="/writing" className="inline-flex items-center text-sm font-medium text-primary">
-            Read Essays <ArrowRight className="ml-2 h-4 w-4" />
+            View all essays <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">

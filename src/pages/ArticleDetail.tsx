@@ -27,25 +27,32 @@ export default function ArticleDetail() {
           articleModifiedTime: article.updatedDate || article.date,
         }
       : {
-          title: 'Writing | Priya Darshani',
-          description: 'Essays on trust, judgement and the future of AI deployment.',
+          title: 'Essays | Priya Darshani',
+          description: 'Long-form essays exploring how organisations evaluate, trust and deploy artificial intelligence.',
           canonical: 'https://priyadarshani.ai/writing',
         }
   );
 
-  // Inject Article JSON-LD, replaced on each article navigation
+  // Inject BlogPosting JSON-LD, replaced on each article navigation
   useEffect(() => {
     if (!article) return;
 
     const jsonLd = {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "BlogPosting",
       "headline": article.title,
       "description": article.excerpt,
       "author": {
         "@type": "Person",
         "name": "Priya Darshani",
         "url": "https://priyadarshani.ai/about",
+        "jobTitle": "Founder",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "TaskHived",
+          "url": "https://taskhived.com",
+        },
+        "description": "Researching how organisations evaluate, trust and deploy artificial intelligence.",
       },
       "publisher": {
         "@type": "Person",
@@ -55,10 +62,14 @@ export default function ArticleDetail() {
       "datePublished": article.date,
       "dateModified": article.updatedDate || article.date,
       "url": `https://priyadarshani.ai/writing/${article.slug}`,
-      "image": ogImage,
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": `https://priyadarshani.ai/writing/${article.slug}`,
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "name": "Essays by Priya Darshani",
+        "url": "https://priyadarshani.ai/writing",
       },
     };
 
@@ -88,17 +99,23 @@ export default function ArticleDetail() {
       <article>
         <header className="mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-20">
           <Link to="/writing" className="mb-10 inline-flex items-center gap-2 text-sm text-muted-foreground transition hover:text-primary">
-            <ArrowLeft className="h-4 w-4" /> Writing
+            <ArrowLeft className="h-4 w-4" /> Essays
           </Link>
           <div className="max-w-4xl">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-primary">{article.date}</p>
             <h1 className="font-serif-display text-5xl leading-[1.02] md:text-7xl">{article.title}</h1>
-            <p className="mt-6 text-sm text-muted-foreground">
-              Priya Darshani · {article.date}
+            {/* @section: article-author-byline */}
+            <div className="mt-6 flex flex-col gap-1">
+              <p className="text-sm font-medium text-foreground">Priya Darshani</p>
+              <p className="text-xs text-muted-foreground">Founder, TaskHived</p>
+              <p className="text-xs text-muted-foreground">Researching how organisations evaluate, trust and deploy artificial intelligence.</p>
               {article.updatedDate && (
-                <span className="ml-3 text-muted-foreground/60">· Updated: {article.updatedDate}</span>
+                <p className="mt-1 text-xs text-muted-foreground/60">{article.date} · Updated: {article.updatedDate}</p>
               )}
-            </p>
+              {!article.updatedDate && (
+                <p className="mt-1 text-xs text-muted-foreground/60">{article.date}</p>
+              )}
+            </div>
           </div>
         </header>
 
@@ -152,6 +169,19 @@ export default function ArticleDetail() {
                 )}
               </section>
             ))}
+
+            {/* @section: article-substack-cta */}
+            <div className="mt-14 border-t border-border pt-10">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-primary">Continue reading</p>
+              <a
+                href="https://substack.com/@priya289311"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-primary transition hover:underline"
+              >
+                View all essays on Substack
+              </a>
+            </div>
           </div>
         </div>
       </article>
