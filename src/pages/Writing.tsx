@@ -76,6 +76,44 @@ export default function Writing() {
           ))}
         </div>
       </section>
+
+      {/* @section: writing-substack */}
+      <section className="border-t border-border bg-card">
+        <div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
+          <div className="max-w-2xl">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">Newsletter</p>
+            <h2 className="font-serif-display text-3xl leading-tight md:text-5xl">Stay in the conversation.</h2>
+            <p className="mt-5 text-lg leading-8 text-muted-foreground">
+              I write about trust, human judgement and the future of AI deployment. New essays go out via Substack — no noise, no product updates, just the ideas.
+            </p>
+            <div className="mt-8">
+              <a
+                href="https://substack.com/@priya289311"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-[1.02]"
+              >
+                Subscribe on Substack
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* @section: writing-reddit */}
+      <section className="mx-auto max-w-7xl px-5 py-8 md:px-8 md:py-10">
+        <p className="text-sm text-muted-foreground">
+          Discussing these ideas in the open? Join the conversation on Reddit.{" "}
+          <a
+            href="https://www.reddit.com/r/DeployableAI/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-primary transition hover:underline"
+          >
+            r/DeployableAI
+          </a>
+        </p>
+      </section>
     </SiteLayout>
   );
 }
