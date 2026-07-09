@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "source": "src/App.tsx",
+  "generatedAt": "2026-07-09T11:28:33.871Z",
+  "routes": [
+    "/",
+    "/about",
+    "/taskhived",
+    "/writing"
+  ]
+}

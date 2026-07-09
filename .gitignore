@@ -42,7 +42,6 @@ coverage/
 .nyc_output/
 
 # --- Build outputs / caches ---
-dist/
 dist-ssr/
 build/
 electron-dist/
@@ -62,6 +61,10 @@ temp/
 .rts2_cache_umd/
 .vite/
 .vite-inspect/
+.lov.tailwind.config.js
+src/tailwind.config.lov.json
+apps/client/.lov.tailwind.config.js
+apps/client/src/tailwind.config.lov.json
 
 # --- TypeScript ---
 *.tsbuildinfo
@@ -99,4 +102,3 @@ Thumbs.db
 
 # --- Uploaded Files ---
 uploaded_files/
-
