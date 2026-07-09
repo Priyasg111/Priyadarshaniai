@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Priya Darshani Essays</title>
+    <link>https://priyadarshani.ai/writing</link>
+    <description>Essays by Priya Darshani on AI validation, enterprise deployment, governance, trust, and human judgement.</description>
+    <language>en</language>
+    <lastBuildDate>Thu, 09 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://priyadarshani.ai/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Beyond Benchmarks: Why AI Needs Better Evidence Before Deployment</title>
+      <link>https://priyadarshani.ai/writing/beyond-benchmarks-evidence-before-deployment</link>
+      <guid isPermaLink="true">https://priyadarshani.ai/writing/beyond-benchmarks-evidence-before-deployment</guid>
+      <pubDate>Tue, 07 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Benchmarks tell us what AI can do. Organisations need to know whether to trust it. That distinction is becoming one of the most consequential questions in enterprise AI.</description>
+    </item>
+    <item>
+      <title>The Missing Infrastructure for AI</title>
+      <link>https://priyadarshani.ai/writing/missing-infrastructure-for-ai</link>
+      <guid isPermaLink="true">https://priyadarshani.ai/writing/missing-infrastructure-for-ai</guid>
+      <pubDate>Tue, 23 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Why measuring models is no longer enough, and why the future of AI depends on better ways of measuring human judgement, trust and deployment readiness.</description>
+    </item>
+    <item>
+      <title>Why Regulated Industries Cannot Treat AI Validation as a Checkbox</title>
+      <link>https://priyadarshani.ai/writing/regulated-industries-ai-validation-not-a-checkbox</link>
+      <guid isPermaLink="true">https://priyadarshani.ai/writing/regulated-industries-ai-validation-not-a-checkbox</guid>
+      <pubDate>Thu, 09 Apr 2026 00:00:00 GMT</pubDate>
+      <description>In regulated environments, the cost of a poorly deployed AI system is not just operational. It is reputational, legal, and deeply human. That changes what deployment readiness actually requires.</description>
+    </item>
+    <item>
+      <title>The Difference Between AI Safety, AI Security, and AI Trust</title>
+      <link>https://priyadarshani.ai/writing/difference-ai-safety-security-trust</link>
+      <guid isPermaLink="true">https://priyadarshani.ai/writing/difference-ai-safety-security-trust</guid>
+      <pubDate>Tue, 20 Jan 2026 00:00:00 GMT</pubDate>
+      <description>Strategy, AI validation, behavioural science, enterprise deployment, governance, and trust. These are the six lenses I keep returning to.</description>
+    </item>
+    <item>
+      <title>Agentic AI Needs Validation Infrastructure, Not Just Governance Documents</title>
+      <link>https://priyadarshani.ai/writing/agentic-ai-needs-validation-infrastructure</link>
+      <guid isPermaLink="true">https://priyadarshani.ai/writing/agentic-ai-needs-validation-infrastructure</guid>
+      <pubDate>Tue, 11 Nov 2025 00:00:00 GMT</pubDate>
+      <description>The honest version of AI validation starts with uncomfortable questions. What can fail, who notices, and what happens next?</description>
+    </item>
+    <item>
+      <title>What Enterprises Should Measure Before Deploying AI Agents</title>
+      <link>https://priyadarshani.ai/writing/what-enterprises-should-measure-before-deploying-ai-agents</link>
+      <guid isPermaLink="true">https://priyadarshani.ai/writing/what-enterprises-should-measure-before-deploying-ai-agents</guid>
+      <pubDate>Mon, 22 Sep 2025 00:00:00 GMT</pubDate>
+      <description>Validation is not a pass-or-fail stamp. It is a structured way to understand performance, limits, risk, and readiness across real use cases.</description>
+    </item>
+    <item>
+      <title>Why Human Judgment Still Matters in AI Evaluation</title>
+      <link>https://priyadarshani.ai/writing/why-human-judgment-matters-ai-evaluation</link>
+      <guid isPermaLink="true">https://priyadarshani.ai/writing/why-human-judgment-matters-ai-evaluation</guid>
+      <pubDate>Tue, 08 Jul 2025 00:00:00 GMT</pubDate>
+      <description>Automated benchmarks are useful. They cannot tell you whether an AI system behaves well inside the messy reality of enterprise work.</description>
+    </item>
+    <item>
+      <title>From AI Demo to Deployment: What Readiness Actually Requires</title>
+      <link>https://priyadarshani.ai/writing/from-ai-demo-to-deployment-readiness</link>
+      <guid isPermaLink="true">https://priyadarshani.ai/writing/from-ai-demo-to-deployment-readiness</guid>
+      <pubDate>Mon, 19 May 2025 00:00:00 GMT</pubDate>
+      <description>Most enterprises do not have an AI problem. They have a trust problem. The gap between what AI systems can do and what organisations are prepared to deploy is widening, and the cost of that gap is real.</description>
+    </item>
+    <item>
+      <title>The AI Trust Gap: Why Capability Is Moving Faster Than Confidence</title>
+      <link>https://priyadarshani.ai/writing/ai-trust-gap-capability-faster-than-confidence</link>
+      <guid isPermaLink="true">https://priyadarshani.ai/writing/ai-trust-gap-capability-faster-than-confidence</guid>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 GMT</pubDate>
+      <description>AI validation is not a technical checkpoint. It is the discipline that decides whether an organisation can trust a system enough to put it in front of customers, employees, and regulators.</description>
+    </item>
+  </channel>
+</rss>
