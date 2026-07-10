@@ -12,6 +12,7 @@ import * as t from "@babel/types";
 const traverse = _traverse.default ?? _traverse;
 
 const DEFAULT_INPUT = "src/App.tsx";
+const DEFAULT_POSTS_INPUT = "src/data/posts.ts";
 const DEFAULT_OUTPUT = "dist/sitemap-routes.json";
 const EXCLUDED_PREFIXES = ["/api", "/assets", "/publish", "/.well-known"];
 const EXCLUDED_FILES = new Set([
@@ -124,13 +125,29 @@ export function collectSitemapRoutesFromSource(source, filename = DEFAULT_INPUT)
   });
 }
 
-function writeRoutesManifest(outputPath, routes, inputPath) {
+function collectArticleRoutesFromPostsSource(source) {
+  const routes = new Set();
+  const slugPattern = /slug:\s*["']([^"']+)["']/g;
+  let match;
+
+  while ((match = slugPattern.exec(source)) !== null) {
+    const slug = String(match[1] || "").trim();
+    if (slug) {
+      routes.add(`/writing/${slug}`);
+    }
+  }
+
+  return Array.from(routes).sort((a, b) => a.localeCompare(b));
+}
+
+function writeRoutesManifest(outputPath, routes, inputPath, postsInputPath) {
   mkdirSync(dirname(outputPath), { recursive: true });
   writeFileSync(
     outputPath,
     `${JSON.stringify({
-      version: 1,
+      version: 2,
       source: inputPath,
+      postsSource: postsInputPath,
       generatedAt: new Date().toISOString(),
       routes,
     }, null, 2)}\n`
@@ -141,11 +158,20 @@ function run() {
   const cwd = process.cwd();
   const args = parseArgs(process.argv.slice(2));
   const inputPath = resolve(cwd, args.input);
+  const postsInputPath = resolve(cwd, DEFAULT_POSTS_INPUT);
   const outputPath = resolve(cwd, args.output);
   const source = readFileSync(inputPath, "utf-8");
-  const routes = collectSitemapRoutesFromSource(source, args.input);
+  const postsSource = readFileSync(postsInputPath, "utf-8");
+  const routes = Array.from(new Set([
+    ...collectSitemapRoutesFromSource(source, args.input),
+    ...collectArticleRoutesFromPostsSource(postsSource),
+  ])).sort((a, b) => {
+    if (a === "/") return -1;
+    if (b === "/") return 1;
+    return a.localeCompare(b);
+  });
 
-  writeRoutesManifest(outputPath, routes, args.input);
+  writeRoutesManifest(outputPath, routes, args.input, DEFAULT_POSTS_INPUT);
   console.log(`[sitemap-routes] wrote ${routes.length} routes to ${args.output}`);
 }
 

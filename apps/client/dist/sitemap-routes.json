@@ -1,11 +1,21 @@
 {
-  "version": 1,
+  "version": 2,
   "source": "src/App.tsx",
-  "generatedAt": "2026-07-10T06:05:11.825Z",
+  "postsSource": "src/data/posts.ts",
+  "generatedAt": "2026-07-10T06:09:35.342Z",
   "routes": [
     "/",
     "/about",
     "/taskhived",
-    "/writing"
+    "/writing",
+    "/writing/agentic-ai-needs-validation-infrastructure",
+    "/writing/ai-trust-gap-capability-faster-than-confidence",
+    "/writing/beyond-benchmarks-evidence-before-deployment",
+    "/writing/difference-ai-safety-security-trust",
+    "/writing/from-ai-demo-to-deployment-readiness",
+    "/writing/missing-infrastructure-for-ai",
+    "/writing/regulated-industries-ai-validation-not-a-checkbox",
+    "/writing/what-enterprises-should-measure-before-deploying-ai-agents",
+    "/writing/why-human-judgment-matters-ai-evaluation"
   ]
 }
