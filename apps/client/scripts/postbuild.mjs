@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 
 const steps = [
+  ["content-feeds", ["node", "scripts/generate-content-feeds.mjs"]],
   ["sitemap-routes", ["node", "scripts/generate-sitemap-routes.mjs"]],
   ["prerender", ["node", "scripts/prerender.mjs"]],
 ];
