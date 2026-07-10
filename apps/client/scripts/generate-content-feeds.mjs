@@ -1,29 +1,42 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import vm from "node:vm";
 
 const SITE_URL = "https://priyadarshani.ai";
-const AUTHOR_NAME = "Priya Darshani";
-const AUTHOR_URL = `${SITE_URL}/about`;
-const FEED_TITLE = "Priya Darshani Essays";
-const FEED_DESCRIPTION = "Essays by Priya Darshani on AI validation, enterprise deployment, governance, trust, and human judgement.";
-const DEFAULT_CATEGORY = "AI Validation";
-const DEFAULT_READ_TIME = "Essay";
+const SITE_TITLE = "Priya Darshani Essays";
+const SITE_DESCRIPTION = "Essays by Priya Darshani on AI validation, human judgement, deployment readiness, and trust in artificial intelligence.";
+const AUTHOR = {
+  name: "Priya Darshani",
+  url: `${SITE_URL}/about`,
+};
 
-const monthIndex = new Map([
-  ["jan", 0], ["january", 0],
-  ["feb", 1], ["february", 1],
-  ["mar", 2], ["march", 2],
-  ["apr", 3], ["april", 3],
-  ["may", 4],
-  ["jun", 5], ["june", 5],
-  ["jul", 6], ["july", 6],
-  ["aug", 7], ["august", 7],
-  ["sep", 8], ["sept", 8], ["september", 8],
-  ["oct", 9], ["october", 9],
-  ["nov", 10], ["november", 10],
-  ["dec", 11], ["december", 11],
-]);
+const INPUT = resolve(process.cwd(), "src/data/posts.ts");
+const PUBLIC_DIR = resolve(process.cwd(), "public");
+const RSS_OUTPUT = resolve(PUBLIC_DIR, "feed.xml");
+const JSON_OUTPUT = resolve(PUBLIC_DIR, "feed.json");
+const SITEMAP_OUTPUT = resolve(PUBLIC_DIR, "sitemap.xml");
+
+function stripTypeBlocks(source) {
+  return source
+    .replace(/export\s+type\s+Post\s*=\s*\{[\s\S]*?\};\s*/g, "")
+    .replace(/export\s+type\s+ArticleSection\s*=\s*\{[\s\S]*?\};\s*/g, "")
+    .replace(/export\s+type\s+Article\s*=\s*Post\s*&\s*\{[\s\S]*?\};\s*/g, "")
+    .replace(/export\s+const\s+getArticle[\s\S]*$/g, "")
+    .replace(/export\s+const\s+/g, "const ")
+    .replace(/const\s+(posts|featuredHomePost|articles)\s*:\s*[^=\n]+=/g, "const $1 =");
+}
+
+function loadContentData() {
+  const source = readFileSync(INPUT, "utf-8");
+  const executable = `${stripTypeBlocks(source)}\n\nglobalThis.__CONTENT_FEED_DATA__ = { posts, featuredHomePost, articles };`;
+  const context = vm.createContext({ globalThis: {} });
+  vm.runInContext(executable, context, { filename: INPUT, timeout: 1000 });
+  const data = context.globalThis.__CONTENT_FEED_DATA__;
+  if (!data?.articles || typeof data.articles !== "object") {
+    throw new Error("Unable to load articles from src/data/posts.ts");
+  }
+  return data;
+}
 
 function escapeXml(value = "") {
   return String(value)
@@ -35,255 +48,165 @@ function escapeXml(value = "") {
 }
 
 function cdata(value = "") {
-  return `<![CDATA[${String(value).replace(/]]>/g, "]] >")}]]>`;
+  return `<![CDATA[${String(value).replace(/\]\]>/g, "]]]]><![CDATA[>")}]]>`;
 }
 
-function absoluteUrl(pathOrUrl = "") {
-  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
-  const path = pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`;
-  return `${SITE_URL}${path}`;
+function slugUrl(slug) {
+  return `${SITE_URL}/writing/${slug}`;
 }
 
-function parseContentDate(value, fallback = new Date()) {
-  if (!value) return fallback;
+function absoluteAssetUrl(path) {
+  if (!path) return `${SITE_URL}/images/priya-headshot.jpg`;
+  if (/^https?:\/\//i.test(path)) return path;
+  return `${SITE_URL}${path.startsWith("/") ? "" : "/"}${path}`;
+}
+
+function parseDate(value) {
+  if (!value) return null;
   const raw = String(value).trim();
-  const exact = raw.match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
-  if (exact) {
-    const month = monthIndex.get(exact[1].toLowerCase());
-    if (month !== undefined) {
-      return new Date(Date.UTC(Number(exact[3]), month, Number(exact[2]), 0, 0, 0));
-    }
-  }
-
-  const monthYear = raw.match(/^([A-Za-z]+)\s+(\d{4})$/);
-  if (monthYear) {
-    const month = monthIndex.get(monthYear[1].toLowerCase());
-    if (month !== undefined) {
-      return new Date(Date.UTC(Number(monthYear[2]), month, 1, 0, 0, 0));
-    }
-  }
-
-  const parsed = new Date(raw);
-  return Number.isNaN(parsed.getTime()) ? fallback : parsed;
+  const monthYear = raw.match(/^([A-Za-z]{3,9})\s+(\d{4})$/);
+  const normalized = monthYear ? `${monthYear[1]} 1, ${monthYear[2]}` : raw;
+  const parsed = new Date(normalized);
+  if (Number.isNaN(parsed.getTime())) return null;
+  return parsed;
 }
 
-function isoDateOnly(date) {
-  return date.toISOString().slice(0, 10);
+function isoDate(value, fallback) {
+  const parsed = parseDate(value) || parseDate(fallback) || new Date();
+  return parsed.toISOString();
 }
 
-function toRfc822(date) {
-  return date.toUTCString();
+function rfc822Date(value, fallback) {
+  return new Date(isoDate(value, fallback)).toUTCString();
 }
 
-function loadContent() {
-  const sourcePath = resolve(process.cwd(), "src/data/posts.ts");
-  let code = readFileSync(sourcePath, "utf-8");
+function sitemapDate(value, fallback) {
+  return isoDate(value, fallback).slice(0, 10);
+}
 
-  code = code
-    .replace(/export type [\s\S]*?};\n/g, "")
-    .replace(/export const getArticle[\s\S]*$/g, "")
-    .replace(/export const posts\s*:\s*Post\[\]\s*=/, "const posts =")
-    .replace(/export const featuredHomePost\s*:\s*Post\s*=/, "const featuredHomePost =")
-    .replace(/export const articles\s*:\s*Record<string, Article>\s*=/, "const articles =")
-    .replace(/export const/g, "const");
+function plainText(article) {
+  const sectionText = (article.sections || [])
+    .flatMap((section) => [section.title, ...(section.paragraphs || []), section.quote].filter(Boolean));
+  return [article.title, article.excerpt, ...sectionText].filter(Boolean).join("\n\n");
+}
 
-  const context = { __CONTENT__: null };
-  vm.createContext(context);
-  vm.runInContext(`${code}\n__CONTENT__ = { posts, featuredHomePost, articles };`, context, {
-    filename: sourcePath,
-    timeout: 1000,
-  });
+function computedReadTime(article) {
+  if (article.readTime) return article.readTime;
+  const words = plainText(article).trim().split(/\s+/).filter(Boolean).length;
+  return `${Math.max(1, Math.ceil(words / 220))} min read`;
+}
 
-  return context.__CONTENT__;
+function articleCategories(article) {
+  const categories = new Set([article.category || "AI Validation", "Essays"]);
+  if (/deploy|deployment/i.test(`${article.title} ${article.excerpt}`)) categories.add("Deployment Readiness");
+  if (/trust/i.test(`${article.title} ${article.excerpt}`)) categories.add("AI Trust");
+  return Array.from(categories);
 }
 
 function articleHtml(article) {
-  const parts = [];
-  parts.push(`<p>${escapeXml(article.excerpt)}</p>`);
-  for (const section of article.sections ?? []) {
-    parts.push(`<h2 id="${escapeXml(section.id)}">${escapeXml(section.title)}</h2>`);
-    for (const paragraph of section.paragraphs ?? []) {
-      parts.push(`<p>${escapeXml(paragraph)}</p>`);
-    }
-    if (section.quote) {
-      parts.push(`<blockquote>${escapeXml(section.quote)}</blockquote>`);
-    }
-    if (section.midImage) {
-      parts.push(`<figure><img src="${escapeXml(absoluteUrl(section.midImage))}" alt="${escapeXml(section.midImageAlt ?? section.title)}" /></figure>`);
-    }
-  }
-  return parts.join("\n");
-}
-
-function normalizeArticle(article) {
-  const published = parseContentDate(article.date);
-  const updated = article.updatedDate ? parseContentDate(article.updatedDate, published) : published;
-  const canonicalUrl = `${SITE_URL}/writing/${article.slug}`;
-  const imageUrl = absoluteUrl(article.heroImage || article.image);
-  const category = article.category || DEFAULT_CATEGORY;
-  const author = article.author || AUTHOR_NAME;
-  const readTime = article.readTime || DEFAULT_READ_TIME;
-  const contentHtml = articleHtml(article);
-
-  return {
-    ...article,
-    canonicalUrl,
-    imageUrl,
-    category,
-    author,
-    readTime,
-    published,
-    updated,
-    contentHtml,
-  };
-}
-
-function getArticles() {
-  const { articles } = loadContent();
-  return Object.values(articles)
-    .map(normalizeArticle)
-    .sort((a, b) => b.published.getTime() - a.published.getTime());
-}
-
-function rssXml(articles) {
-  const latestDate = articles.reduce((latest, article) => (
-    article.updated.getTime() > latest.getTime() ? article.updated : latest
-  ), new Date(0));
-
-  const items = articles.map((article) => `    <item>
-      <title>${escapeXml(article.title)}</title>
-      <link>${escapeXml(article.canonicalUrl)}</link>
-      <guid isPermaLink="true">${escapeXml(article.canonicalUrl)}</guid>
-      <pubDate>${toRfc822(article.published)}</pubDate>
-      <dc:creator>${escapeXml(article.author)}</dc:creator>
-      <author>${escapeXml(article.author)}</author>
-      <category>${escapeXml(article.category)}</category>
-      <description>${cdata(article.excerpt)}</description>
-      <content:encoded>${cdata(article.contentHtml)}</content:encoded>
-      <media:content url="${escapeXml(article.imageUrl)}" medium="image" />
-      <media:thumbnail url="${escapeXml(article.imageUrl)}" />
-      <enclosure url="${escapeXml(article.imageUrl)}" type="image/jpeg" length="0" />
-      <atom:link href="${escapeXml(article.canonicalUrl)}" rel="alternate" type="text/html" />
-      <dcterms:modified>${article.updated.toISOString()}</dcterms:modified>
-      <source url="${SITE_URL}/feed.xml">${escapeXml(FEED_TITLE)}</source>
-      <priya:readingTime>${escapeXml(article.readTime)}</priya:readingTime>
-      <priya:canonicalUrl>${escapeXml(article.canonicalUrl)}</priya:canonicalUrl>
-      <priya:updatedDate>${escapeXml(article.updatedDate || article.date)}</priya:updatedDate>
-    </item>`).join("\n");
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"
-  xmlns:atom="http://www.w3.org/2005/Atom"
-  xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  xmlns:dc="http://purl.org/dc/elements/1.1/"
-  xmlns:dcterms="http://purl.org/dc/terms/"
-  xmlns:media="http://search.yahoo.com/mrss/"
-  xmlns:priya="https://priyadarshani.ai/ns/rss">
-  <channel>
-    <title>${escapeXml(FEED_TITLE)}</title>
-    <link>${SITE_URL}/writing</link>
-    <description>${escapeXml(FEED_DESCRIPTION)}</description>
-    <language>en</language>
-    <lastBuildDate>${toRfc822(latestDate)}</lastBuildDate>
-    <generator>priyadarshani.ai build-time feed generator</generator>
-    <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />
-    <atom:link href="${SITE_URL}/feed.json" rel="alternate" type="application/feed+json" />
-    <image>
-      <url>${SITE_URL}/favicon.png</url>
-      <title>${escapeXml(FEED_TITLE)}</title>
-      <link>${SITE_URL}/writing</link>
-    </image>
-${items}
-  </channel>
-</rss>
-`;
-}
-
-function jsonFeed(articles) {
-  return `${JSON.stringify({
-    version: "https://jsonfeed.org/version/1.1",
-    title: FEED_TITLE,
-    home_page_url: `${SITE_URL}/writing`,
-    feed_url: `${SITE_URL}/feed.json`,
-    description: FEED_DESCRIPTION,
-    language: "en",
-    authors: [{ name: AUTHOR_NAME, url: AUTHOR_URL }],
-    items: articles.map((article) => ({
-      id: article.canonicalUrl,
-      url: article.canonicalUrl,
-      external_url: article.canonicalUrl,
-      title: article.title,
-      content_html: article.contentHtml,
-      summary: article.excerpt,
-      image: article.imageUrl,
-      banner_image: article.imageUrl,
-      date_published: article.published.toISOString(),
-      date_modified: article.updated.toISOString(),
-      authors: [{ name: article.author, url: AUTHOR_URL }],
-      tags: [article.category, article.readTime].filter(Boolean),
-      _priyadarshani: {
-        slug: article.slug,
-        canonical_url: article.canonicalUrl,
-        reading_time: article.readTime,
-        updated_date: article.updatedDate || article.date,
-      },
-    })),
-  }, null, 2)}\n`;
-}
-
-function sitemapXml(articles) {
-  const staticRoutes = [
-    { loc: `${SITE_URL}/`, lastmod: "2026-07-10", changefreq: "monthly", priority: "1.0" },
-    { loc: `${SITE_URL}/about`, lastmod: "2026-07-10", changefreq: "monthly", priority: "0.9" },
-    { loc: `${SITE_URL}/writing`, lastmod: "2026-07-10", changefreq: "weekly", priority: "0.8" },
-    { loc: `${SITE_URL}/taskhived`, lastmod: "2026-07-10", changefreq: "monthly", priority: "0.7" },
-  ];
-
-  const articleRoutes = articles.map((article) => ({
-    loc: article.canonicalUrl,
-    lastmod: isoDateOnly(article.updated),
-    changefreq: "monthly",
-    priority: article.featured ? "0.8" : "0.7",
-  }));
-
-  const entries = [...staticRoutes, ...articleRoutes]
-    .map((route) => `  <url>
-    <loc>${escapeXml(route.loc)}</loc>
-    <lastmod>${route.lastmod}</lastmod>
-    <changefreq>${route.changefreq}</changefreq>
-    <priority>${route.priority}</priority>
-  </url>`)
+  const published = escapeXml(article.date);
+  const updated = escapeXml(article.updatedDate || article.date);
+  const readTime = escapeXml(computedReadTime(article));
+  const image = absoluteAssetUrl(article.heroImage || article.image);
+  const sections = (article.sections || [])
+    .map((section) => {
+      const paragraphs = (section.paragraphs || []).map((paragraph) => `<p>${escapeXml(paragraph)}</p>`).join("\n");
+      const quote = section.quote ? `\n<blockquote>${escapeXml(section.quote)}</blockquote>` : "";
+      const midImage = section.midImage
+        ? `\n<figure><img src="${escapeXml(absoluteAssetUrl(section.midImage))}" alt="${escapeXml(section.midImageAlt || section.title)}" /></figure>`
+        : "";
+      return `<section id="${escapeXml(section.id)}">\n<h2>${escapeXml(section.title)}</h2>\n${paragraphs}${quote}${midImage}\n</section>`;
+    })
     .join("\n");
 
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${entries}
-</urlset>
-`;
+  return `<article>\n<header>\n<h1>${escapeXml(article.title)}</h1>\n<p>By ${escapeXml(article.author || AUTHOR.name)} · Published ${published} · Updated ${updated} · ${readTime}</p>\n<p>${escapeXml(article.excerpt)}</p>\n<figure><img src="${escapeXml(image)}" alt="${escapeXml(`Hero image for ${article.title}`)}" /></figure>\n</header>\n${sections}\n</article>`;
 }
 
-function writeGeneratedFile(relativePath, content) {
-  const destinations = [
-    resolve(process.cwd(), "public", relativePath),
-    resolve(process.cwd(), "dist", relativePath),
-  ];
+function sortArticles(articles) {
+  return Object.values(articles).sort((a, b) => {
+    const bDate = parseDate(b.date)?.getTime() ?? 0;
+    const aDate = parseDate(a.date)?.getTime() ?? 0;
+    return bDate - aDate || a.title.localeCompare(b.title);
+  });
+}
 
-  for (const destination of destinations) {
-    if (destination.includes(`${process.cwd()}/dist`) && !existsSync(resolve(process.cwd(), "dist"))) {
-      continue;
-    }
-    mkdirSync(dirname(destination), { recursive: true });
-    writeFileSync(destination, content, "utf-8");
-    console.log(`[content-feeds] wrote ${relativePath} -> ${destination}`);
-  }
+function generateRss(items) {
+  const latest = items.reduce((max, item) => {
+    const time = parseDate(item.updatedDate || item.date)?.getTime() ?? 0;
+    return Math.max(max, time);
+  }, 0);
+
+  const rssItems = items.map((article) => {
+    const url = slugUrl(article.slug);
+    const image = absoluteAssetUrl(article.heroImage || article.image);
+    const categories = articleCategories(article).map((category) => `      <category>${escapeXml(category)}</category>`).join("\n");
+    const html = articleHtml(article);
+    return `    <item>\n      <title>${escapeXml(article.title)}</title>\n      <link>${escapeXml(url)}</link>\n      <guid isPermaLink="true">${escapeXml(url)}</guid>\n      <description>${cdata(article.excerpt)}</description>\n      <content:encoded>${cdata(html)}</content:encoded>\n      <dc:creator>${escapeXml(article.author || AUTHOR.name)}</dc:creator>\n      <pubDate>${rfc822Date(article.date)}</pubDate>\n      <atom:updated>${isoDate(article.updatedDate || article.date, article.date)}</atom:updated>\n      <priya:updatedDate>${escapeXml(article.updatedDate || article.date)}</priya:updatedDate>\n      <priya:readingTime>${escapeXml(computedReadTime(article))}</priya:readingTime>\n      <priya:canonicalUrl>${escapeXml(url)}</priya:canonicalUrl>\n${categories}\n      <media:content url="${escapeXml(image)}" medium="image" />\n      <media:thumbnail url="${escapeXml(image)}" />\n      <enclosure url="${escapeXml(image)}" type="image/jpeg" />\n    </item>`;
+  }).join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n  xmlns:atom="http://www.w3.org/2005/Atom"\n  xmlns:content="http://purl.org/rss/1.0/modules/content/"\n  xmlns:dc="http://purl.org/dc/elements/1.1/"\n  xmlns:media="http://search.yahoo.com/mrss/"\n  xmlns:priya="https://priyadarshani.ai/feed/ns#">\n  <channel>\n    <title>${escapeXml(SITE_TITLE)}</title>\n    <link>${escapeXml(SITE_URL)}</link>\n    <atom:link href="${escapeXml(`${SITE_URL}/feed.xml`)}" rel="self" type="application/rss+xml" />\n    <description>${escapeXml(SITE_DESCRIPTION)}</description>\n    <language>en</language>\n    <lastBuildDate>${new Date(latest || Date.now()).toUTCString()}</lastBuildDate>\n    <generator>priyadarshani.ai content feed generator</generator>\n${rssItems}\n  </channel>\n</rss>\n`;
+}
+
+function generateJsonFeed(items) {
+  const feed = {
+    version: "https://jsonfeed.org/version/1.1",
+    title: SITE_TITLE,
+    home_page_url: SITE_URL,
+    feed_url: `${SITE_URL}/feed.json`,
+    description: SITE_DESCRIPTION,
+    authors: [AUTHOR],
+    language: "en",
+    items: items.map((article) => {
+      const url = slugUrl(article.slug);
+      const image = absoluteAssetUrl(article.heroImage || article.image);
+      return {
+        id: url,
+        url,
+        external_url: url,
+        title: article.title,
+        summary: article.excerpt,
+        content_html: articleHtml(article),
+        content_text: plainText(article),
+        image,
+        banner_image: image,
+        tags: articleCategories(article),
+        authors: [{ name: article.author || AUTHOR.name, url: AUTHOR.url }],
+        date_published: isoDate(article.date),
+        date_modified: isoDate(article.updatedDate || article.date, article.date),
+        _metadata: {
+          reading_time: computedReadTime(article),
+          canonical_url: url,
+        },
+      };
+    }),
+  };
+  return `${JSON.stringify(feed, null, 2)}\n`;
+}
+
+function generateSitemap(items) {
+  const staticRoutes = [
+    { loc: `${SITE_URL}/`, lastmod: new Date().toISOString().slice(0, 10) },
+    { loc: `${SITE_URL}/writing`, lastmod: new Date().toISOString().slice(0, 10) },
+    { loc: `${SITE_URL}/about`, lastmod: new Date().toISOString().slice(0, 10) },
+    { loc: `${SITE_URL}/taskhived`, lastmod: new Date().toISOString().slice(0, 10) },
+  ];
+  const articleRoutes = items.map((article) => ({
+    loc: slugUrl(article.slug),
+    lastmod: sitemapDate(article.updatedDate || article.date, article.date),
+  }));
+  const urls = [...staticRoutes, ...articleRoutes];
+  const body = urls.map((entry) => `  <url>\n    <loc>${escapeXml(entry.loc)}</loc>\n    <lastmod>${escapeXml(entry.lastmod)}</lastmod>\n  </url>`).join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
 
 function run() {
-  const articles = getArticles();
-  writeGeneratedFile("feed.xml", rssXml(articles));
-  writeGeneratedFile("feed.json", jsonFeed(articles));
-  writeGeneratedFile("sitemap.xml", sitemapXml(articles));
-  console.log(`[content-feeds] generated feeds and sitemap from ${articles.length} articles in src/data/posts.ts`);
+  const data = loadContentData();
+  const items = sortArticles(data.articles);
+  mkdirSync(dirname(RSS_OUTPUT), { recursive: true });
+  writeFileSync(RSS_OUTPUT, generateRss(items));
+  writeFileSync(JSON_OUTPUT, generateJsonFeed(items));
+  writeFileSync(SITEMAP_OUTPUT, generateSitemap(items));
+  console.log(`[content-feeds] wrote ${items.length} RSS items, ${items.length} JSON feed items, and ${items.length + 4} sitemap URLs`);
 }
 
 run();
