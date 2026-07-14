@@ -2,7 +2,7 @@
   "version": 2,
   "source": "src/App.tsx",
   "postsSource": "src/data/posts.ts",
-  "generatedAt": "2026-07-10T06:09:35.342Z",
+  "generatedAt": "2026-07-14T14:16:53.373Z",
   "routes": [
     "/",
     "/about",
@@ -10,6 +10,7 @@
     "/writing",
     "/writing/agentic-ai-needs-validation-infrastructure",
     "/writing/ai-trust-gap-capability-faster-than-confidence",
+    "/writing/before-ai-can-replace-work-it-must-earn-trust",
     "/writing/beyond-benchmarks-evidence-before-deployment",
     "/writing/difference-ai-safety-security-trust",
     "/writing/from-ai-demo-to-deployment-readiness",
