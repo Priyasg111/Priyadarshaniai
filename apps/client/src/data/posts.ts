@@ -97,6 +97,18 @@ export const posts: Post[] = [
     readTime: "8 min read",
     featured: false,
   },
+  {
+    title: "Before AI Can Replace Work, It Must Earn Trust",
+    slug: "before-ai-can-replace-work-it-must-earn-trust",
+    date: "Jul 14, 2026",
+    image: "/images/art_c_2.jpeg",
+    excerpt:
+      "AI can already perform parts of the work people do. The harder question is whether organisations have enough evidence to trust it with consequential decisions.",
+    category: "Future of Work",
+    author: "Priya Darshani",
+    readTime: "6 min read",
+    featured: false,
+  },
 ];
 
 export const featuredHomePost: Post = {
@@ -497,6 +509,59 @@ export const articles: Record<string, Article> = {
           "Human-in-the-loop should not be viewed merely as a safety checkpoint or manual review process. It should become an integral part of how organisations evaluate AI before deployment, transforming human expertise into evidence that improves confidence rather than simply correcting errors after they occur. In this model, human judgment is not the opposite of artificial intelligence. It is the infrastructure that allows artificial intelligence to be deployed responsibly at scale.",
           "As AI becomes embedded across healthcare, finance, law, education, government and critical infrastructure, the organisations that succeed will not necessarily be those with access to the most powerful models. They will be those with the strongest evidence supporting how, where and under what conditions those models should be trusted.",
           "The question that increasingly guides my work is no longer: How intelligent is this model? It is: What evidence do we need before we trust it? The answer to that question will shape the future of enterprise AI far more than the next benchmark ever will.",
+        ],
+      },
+    ],
+  },
+
+  /* ─── Article J ─── */
+  "before-ai-can-replace-work-it-must-earn-trust": {
+    ...posts[8],
+    heroImage: "/images/art_c_2.jpeg",
+    sections: [
+      {
+        id: "the-promise-and-the-hesitation",
+        title: "The promise and the hesitation",
+        paragraphs: [
+          "There is a version of the future where AI handles a significant share of the work that currently falls to people. Some of that future is already here. AI systems draft documents, screen candidates, assess risk, triage support requests and summarise legal contracts. The question is not whether AI can do these things. It clearly can. The question is whether organisations are ready to let it.",
+          "Trust, not capability, is the rate-limiting factor.",
+          "I talk to organisations regularly about AI deployment. What I hear, consistently, is not scepticism about whether AI works. The technology has demonstrated enough to move past that debate. What I hear is something more specific: a reluctance to hand over consequential decisions without a clearer way to verify that the system is behaving as expected.",
+          "This hesitation is rational. It is not technophobia. It is the same caution any organisation applies before trusting any new process with decisions that affect customers, employees or citizens. The question is not whether to trust AI. It is how to build that trust in a way that is rigorous rather than optimistic.",
+          "Right now, that rigour is mostly missing.",
+        ],
+      },
+      {
+        id: "why-demonstrations-are-not-enough",
+        title: "Why demonstrations are not enough",
+        paragraphs: [
+          "Most AI deployments begin with a demonstration. A vendor shows what the system can do on a curated dataset. Internal teams run a pilot. Benchmark scores are presented. Results look impressive.",
+          "Then the system goes into production, and something shifts. The performance gap between controlled testing and real-world deployment is one of the most consistent findings in enterprise AI adoption. It is not a failure of the technology. It is a failure of the evidence gathered before deployment.",
+          "Demonstrations answer the question: can this system produce good outputs? They do not answer the questions that matter for a sustained deployment: does it behave consistently across the full range of cases it will actually encounter? How does it perform when the data is messier than the test set? What happens in the cases where expert opinion is divided? Where does confidence break down?",
+          "Organisations need evidence that reflects the conditions of actual deployment, not the conditions of an optimised demonstration.",
+        ],
+        midImage: "/images/art_c_1.jpeg",
+        midImageAlt: "Editorial visual representing human review and AI deployment evidence",
+      },
+      {
+        id: "the-role-human-judgement-plays",
+        title: "The role human judgement plays",
+        paragraphs: [
+          "This is where human judgement becomes infrastructure rather than oversight.",
+          "The common framing of human-in-the-loop positions people as a safety net: a reviewer who catches errors before they cause harm. That framing is not wrong, but it understates what structured human evaluation can do before a system is deployed.",
+          "When expert reviewers assess AI outputs systematically, measuring where they agree, where they disagree, and under what conditions their confidence shifts, that process generates evidence. It tells an organisation something specific about how much trust is warranted and in which contexts. It turns an informal sense of whether the system seems good enough into a measurable basis for a deployment decision.",
+          "This kind of evaluation is not yet standard practice. Most organisations rely on a combination of benchmark scores, internal pilots and a degree of institutional confidence in the vendor. The evidence base for consequential AI deployments is thinner than it should be.",
+        ],
+        quote: "Human judgement becomes infrastructure when it gives organisations evidence they can use before deployment.",
+      },
+      {
+        id: "trust-is-earned-incrementally",
+        title: "Trust is earned incrementally",
+        paragraphs: [
+          "The most durable trust is built gradually. It accumulates through repeated experience of a system behaving as expected, combined with transparency about where it does not.",
+          "Rather than asking whether an AI system is ready to replace a process entirely, the more useful question is: in which subset of cases is there sufficient evidence to deploy now, and in which cases does more evaluation need to come first?",
+          "Deployment is not binary. Trust is not binary. An organisation can extend AI autonomy in the cases where evidence is strong while maintaining closer human oversight in the cases where it is not.",
+          "I do not think the organisations that lead in enterprise AI will be the ones that move fastest. I think they will be the ones that build evidence most rigorously before they move.",
+          "The question I keep returning to is not how capable AI has become. It is: what would it take to trust it enough to let it do more?",
         ],
       },
     ],
