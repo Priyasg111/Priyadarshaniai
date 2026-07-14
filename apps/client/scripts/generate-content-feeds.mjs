@@ -12,9 +12,8 @@ const AUTHOR = {
 
 const INPUT = resolve(process.cwd(), "src/data/posts.ts");
 const PUBLIC_DIR = resolve(process.cwd(), "public");
-const RSS_OUTPUT = resolve(PUBLIC_DIR, "feed.xml");
-const JSON_OUTPUT = resolve(PUBLIC_DIR, "feed.json");
-const SITEMAP_OUTPUT = resolve(PUBLIC_DIR, "sitemap.xml");
+const DIST_DIR = resolve(process.cwd(), "dist");
+const OUTPUT_TARGETS = [PUBLIC_DIR, DIST_DIR];
 
 function stripTypeBlocks(source) {
   return source
@@ -202,11 +201,18 @@ function generateSitemap(items) {
 function run() {
   const data = loadContentData();
   const items = sortArticles(data.articles);
-  mkdirSync(dirname(RSS_OUTPUT), { recursive: true });
-  writeFileSync(RSS_OUTPUT, generateRss(items));
-  writeFileSync(JSON_OUTPUT, generateJsonFeed(items));
-  writeFileSync(SITEMAP_OUTPUT, generateSitemap(items));
-  console.log(`[content-feeds] wrote ${items.length} RSS items, ${items.length} JSON feed items, and ${items.length + 4} sitemap URLs`);
+  const rss = generateRss(items);
+  const jsonFeed = generateJsonFeed(items);
+  const sitemap = generateSitemap(items);
+
+  for (const targetDir of OUTPUT_TARGETS) {
+    mkdirSync(targetDir, { recursive: true });
+    writeFileSync(resolve(targetDir, "feed.xml"), rss);
+    writeFileSync(resolve(targetDir, "feed.json"), jsonFeed);
+    writeFileSync(resolve(targetDir, "sitemap.xml"), sitemap);
+  }
+
+  console.log(`[content-feeds] wrote ${items.length} RSS items, ${items.length} JSON feed items, and ${items.length + 4} sitemap URLs to ${OUTPUT_TARGETS.length} output targets`);
 }
 
 run();
