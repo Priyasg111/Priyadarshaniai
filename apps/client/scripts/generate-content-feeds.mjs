@@ -1,5 +1,5 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { resolve } from "node:path";
 import vm from "node:vm";
 
 const SITE_URL = "https://priyadarshani.ai";
@@ -109,7 +109,9 @@ function articleHtml(article) {
   const image = absoluteAssetUrl(article.heroImage || article.image);
   const sections = (article.sections || [])
     .map((section) => {
-      const paragraphs = (section.paragraphs || []).map((paragraph) => `<p>${escapeXml(paragraph)}</p>`).join("\n");
+      const paragraphs = (section.paragraphs || [])
+        .map((paragraph) => `<p>${section.html ? paragraph : escapeXml(paragraph)}</p>`)
+        .join("\n");
       const quote = section.quote ? `\n<blockquote>${escapeXml(section.quote)}</blockquote>` : "";
       const midImage = section.midImage
         ? `\n<figure><img src="${escapeXml(absoluteAssetUrl(section.midImage))}" alt="${escapeXml(section.midImageAlt || section.title)}" /></figure>`
@@ -118,7 +120,8 @@ function articleHtml(article) {
     })
     .join("\n");
 
-  return `<article>\n<header>\n<h1>${escapeXml(article.title)}</h1>\n<p>By ${escapeXml(article.author || AUTHOR.name)} · Published ${published} · Updated ${updated} · ${readTime}</p>\n<p>${escapeXml(article.excerpt)}</p>\n<figure><img src="${escapeXml(image)}" alt="${escapeXml(`Hero image for ${article.title}`)}" /></figure>\n</header>\n${sections}\n</article>`;
+  const excerpt = article.showExcerpt === false ? "" : `\n<p>${escapeXml(article.excerpt)}</p>`;
+  return `<article>\n<header>\n<h1>${escapeXml(article.title)}</h1>\n<p>By ${escapeXml(article.author || AUTHOR.name)} · Published ${published} · Updated ${updated} · ${readTime}</p>${excerpt}\n<figure><img src="${escapeXml(image)}" alt="${escapeXml(`Hero image for ${article.title}`)}" /></figure>\n</header>\n${sections}\n</article>`;
 }
 
 function sortArticles(articles) {

@@ -2,19 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://priyadarshani.ai/</loc>
-    <lastmod>2026-07-14</lastmod>
+    <lastmod>2026-07-16</lastmod>
   </url>
   <url>
     <loc>https://priyadarshani.ai/writing</loc>
-    <lastmod>2026-07-14</lastmod>
+    <lastmod>2026-07-16</lastmod>
   </url>
   <url>
     <loc>https://priyadarshani.ai/about</loc>
-    <lastmod>2026-07-14</lastmod>
+    <lastmod>2026-07-16</lastmod>
   </url>
   <url>
     <loc>https://priyadarshani.ai/taskhived</loc>
-    <lastmod>2026-07-14</lastmod>
+    <lastmod>2026-07-16</lastmod>
+  </url>
+  <url>
+    <loc>https://priyadarshani.ai/writing/trust-is-not-a-feature-of-an-ai-system</loc>
+    <lastmod>2026-07-16</lastmod>
   </url>
   <url>
     <loc>https://priyadarshani.ai/writing/before-ai-can-replace-work-it-must-earn-trust</loc>
@@ -29,12 +33,12 @@
     <lastmod>2026-06-23</lastmod>
   </url>
   <url>
-    <loc>https://priyadarshani.ai/writing/missing-infrastructure-for-ai</loc>
-    <lastmod>2026-06-23</lastmod>
-  </url>
-  <url>
     <loc>https://priyadarshani.ai/writing/regulated-industries-ai-validation-not-a-checkbox</loc>
     <lastmod>2026-07-01</lastmod>
+  </url>
+  <url>
+    <loc>https://priyadarshani.ai/writing/difference-ai-safety-security-trust</loc>
+    <lastmod>2026-01-20</lastmod>
   </url>
   <url>
     <loc>https://priyadarshani.ai/writing/agentic-ai-needs-validation-infrastructure</loc>

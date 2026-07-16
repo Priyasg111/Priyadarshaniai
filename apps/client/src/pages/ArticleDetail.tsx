@@ -107,8 +107,14 @@ export default function ArticleDetail() {
             {/* @section: article-author-byline */}
             <div className="mt-6 flex flex-col gap-1">
               <p className="text-sm font-medium text-foreground">Priya Darshani</p>
-              <p className="text-xs text-muted-foreground">Founder, TaskHived</p>
-              <p className="text-xs text-muted-foreground">Researching how organisations evaluate, trust and deploy artificial intelligence.</p>
+              {article.authorDescription ? (
+                <p className="text-xs text-muted-foreground">{article.authorDescription}</p>
+              ) : (
+                <>
+                  <p className="text-xs text-muted-foreground">Founder, TaskHived</p>
+                  <p className="text-xs text-muted-foreground">Researching how organisations evaluate, trust and deploy artificial intelligence.</p>
+                </>
+              )}
               {article.updatedDate && (
                 <p className="mt-1 text-xs text-muted-foreground/60">{article.date} · Updated: {article.updatedDate}</p>
               )}
@@ -144,13 +150,19 @@ export default function ArticleDetail() {
           </aside>
 
           <div className="max-w-none">
-            <p className="mb-10 text-xl leading-9 text-foreground/90">{article.excerpt}</p>
+            {article.showExcerpt !== false && (
+              <p className="mb-10 text-xl leading-9 text-foreground/90">{article.excerpt}</p>
+            )}
             {article.sections.map((section) => (
               <section key={section.id} id={section.id} className="scroll-mt-28 border-t border-border py-10 first:border-t-0 first:pt-0">
                 <h2 className="mb-5 font-serif-display text-3xl leading-tight md:text-4xl">{section.title}</h2>
-                <div className="space-y-6 text-base leading-8 text-muted-foreground md:text-lg md:leading-9">
+                <div className="space-y-6 text-base leading-8 text-muted-foreground md:text-lg md:leading-9 [&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4">
                   {section.paragraphs.map((paragraph) => (
-                    <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+                    section.html ? (
+                      <p key={paragraph.slice(0, 40)} dangerouslySetInnerHTML={{ __html: paragraph }} />
+                    ) : (
+                      <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+                    )
                   ))}
                 </div>
                 {section.quote && (

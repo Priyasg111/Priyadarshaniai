@@ -15,6 +15,7 @@ export type ArticleSection = {
   id: string;
   title: string;
   paragraphs: string[];
+  html?: boolean;
   quote?: string;
   midImage?: string;
   midImageAlt?: string;
@@ -22,10 +23,24 @@ export type ArticleSection = {
 
 export type Article = Post & {
   heroImage: string;
+  authorDescription?: string;
+  showExcerpt?: boolean;
   sections: ArticleSection[];
 };
 
 export const posts: Post[] = [
+  {
+    title: "Trust Is Not a Feature of an AI System",
+    slug: "trust-is-not-a-feature-of-an-ai-system",
+    date: "Jul 16, 2026",
+    image: "/images/trust-not-feature-essay-hero_2.png",
+    excerpt:
+      "AI trust is not a technical feature to be shipped. It is justified organisational reliance in a specific context, supported by evidence, human oversight and accountable institutions.",
+    category: "AI Trust",
+    author: "Priya Darshani",
+    readTime: "10 min read",
+    featured: false,
+  },
   {
     title: "The AI Trust Gap: Why Capability Is Moving Faster Than Confidence",
     slug: "ai-trust-gap-capability-faster-than-confidence",
@@ -121,9 +136,126 @@ export const featuredHomePost: Post = {
 };
 
 export const articles: Record<string, Article> = {
+  /* @section: trust-is-not-a-feature-essay */
+  "trust-is-not-a-feature-of-an-ai-system": {
+    ...posts[0],
+    heroImage: "/images/trust-not-feature-essay-hero_2.png",
+    authorDescription: "Founder, TaskHived | Researching how organisations evaluate, trust and deploy artificial intelligence responsibly.",
+    showExcerpt: false,
+    sections: [
+      {
+        id: "the-wrong-question",
+        title: "The wrong question",
+        html: true,
+        paragraphs: [
+          `Most conversations about trustworthy AI begin in the wrong place.`,
+          `They ask whether a system has the right properties. Is it accurate? Is it safe? Is it explainable? Is it robust? These questions matter. Without them, no serious deployment conversation can begin. But they are not enough, because trust is not a feature inside an AI system. Trust is a relationship between a system, a decision context, the people affected by the decision, and the institution willing to be accountable for using it.`,
+          `This distinction is becoming more important as artificial intelligence moves from experimentation into organisational decision-making. The Stanford 2026 AI Index reports that organisational AI adoption reached 88 percent, while responsible AI benchmark reporting remains uneven and documented AI incidents rose from 233 in 2024 to 362 in 2025 <a href="#ref1">[1]</a>. The problem is not simply that AI is advancing quickly. The deeper issue is that adoption is moving faster than the organisational disciplines needed to understand when AI deserves trust.`,
+          `Trust is often treated as something a system can earn through performance. A model scores well, passes a test, produces plausible answers and becomes trusted. But organisations do not deploy benchmark scores. They deploy systems into workflows where people must interpret outputs, make tradeoffs, handle exceptions and explain decisions later. In that environment, trust depends less on a single technical property and more on whether the organisation has enough evidence to use the system responsibly.`,
+          `That is why I think the language of trust needs to become more precise. We should not ask, “Is this AI trustworthy?” as if trust were a universal label. We should ask, “Trustworthy for what decision, under what conditions, for which people, with what oversight, and with what evidence?”`,
+        ],
+      },
+      {
+        id: "trust-depends-on-context",
+        title: "Trust depends on context",
+        html: true,
+        paragraphs: [
+          `The NIST AI Risk Management Framework is useful because it treats trustworthiness as multidimensional. It identifies valid and reliable, safe, secure and resilient, accountable and transparent, explainable and interpretable, privacy-enhanced, and fair with harmful bias managed as characteristics of trustworthy AI systems <a href="#ref2">[2]</a>. Each characteristic matters. Yet NIST also makes clear that risk management involves tradeoffs and that human judgment and diverse input are essential for defining metrics and navigating those tradeoffs <a href="#ref2">[2]</a>.`,
+          `This is the part that often gets lost. A system can be accurate and still be unsuitable for a particular deployment. It can be explainable in a technical sense and still fail to create understanding for the people who rely on it. It can perform well in one population and fail in another. It can be safe enough for a low-stakes recommendation and unacceptable for a decision that affects someone’s health, employment or access to public services.`,
+          `Context changes the meaning of performance.`,
+          `A customer support chatbot that gives an imperfect answer may create frustration. A clinical triage system that gives an imperfect recommendation may create harm. A financial compliance tool that misses a risk signal may expose an organisation to regulatory consequences. These are not merely different use cases. They are different trust relationships.`,
+          `That is why organisations need to move from general claims about trustworthy AI to specific evidence about deployment readiness. They need to understand the task, the workflow, the people involved, the consequences of failure, the level of human oversight required and the institutional responsibility attached to the decision.`,
+          `The OECD principle on human-centred values and fairness makes a related point. It says AI actors should respect rule of law, human rights, democratic and human-centred values throughout the AI lifecycle, and should implement safeguards such as human agency and oversight in ways appropriate to the context <a href="#ref3">[3]</a>. The phrase “appropriate to the context” is doing important work. It reminds us that trust cannot be separated from where the system is used and what it is being asked to influence.`,
+        ],
+      },
+      {
+        id: "institutions-not-systems-carry-responsibility",
+        title: "Institutions, not systems, carry responsibility",
+        html: true,
+        paragraphs: [
+          `One reason trust is difficult to measure is that AI systems do not carry responsibility by themselves. Institutions do.`,
+          `When an organisation deploys an AI system, it is not only adopting a tool. It is accepting a new form of decision infrastructure. It must decide who monitors the system, who can challenge it, who investigates failures, who communicates limitations and who remains accountable when the output is wrong.`,
+          `NIST’s human-AI interaction appendix states that human roles and responsibilities in decision-making and overseeing AI systems need to be clearly defined and differentiated <a href="#ref4">[4]</a>. This may sound basic, but it is one of the hardest parts of deployment. In many organisations, responsibility is distributed across product teams, data teams, legal teams, compliance teams, business owners, vendors and end users. When something goes wrong, each group may have touched part of the system, but no single group may understand the whole decision.`,
+          `This is where trust becomes institutional rather than technical. A system may be technically impressive, but if the organisation cannot explain how it is governed, monitored and corrected, trust remains fragile.`,
+          `The IBM article on enterprise AI scale expresses this in practical terms. It says enterprise conversations shift from what AI can do to whether AI can be trusted to do it consistently, safely and at scale <a href="#ref5">[5]</a>. One quoted line captures the operational nature of the problem: “The harder questions come fast. How is the model governed? Where does the data live? Can the output be audited? What happens when the model is wrong?” <a href="#ref5">[5]</a>.`,
+          `Those are trust questions. They are also governance questions, audit questions and responsibility questions.`,
+          `The same article uses another phrase I find helpful: “Trust is not a slogan. It is an operating model” <a href="#ref5">[5]</a>. That sentence matters because it moves trust away from branding and toward practice. If trust is an operating model, then it must be designed, tested, maintained and improved. It must be visible in decision rights, escalation paths, monitoring routines, documentation, human oversight and evidence collection.`,
+        ],
+      },
+      {
+        id: "evidence-creates-the-conditions-for-trust",
+        title: "Evidence creates the conditions for trust",
+        html: true,
+        paragraphs: [
+          `Trust should not mean confidence without evidence. It should mean confidence because the right evidence exists.`,
+          `For AI deployment, evidence is not only a model score. It includes how the system performs in the actual workflow, how experts judge its outputs, how often humans disagree with it, where uncertainty appears, what kinds of errors occur, which users over-rely on the system, what happens when conditions change and whether affected people can contest decisions.`,
+          `This is why I believe human judgment is not a temporary bridge until AI becomes more capable. Human judgment is part of the evidence infrastructure required for responsible deployment.`,
+          `NIST notes that representing complex human phenomena with mathematical models can remove necessary context <a href="#ref4">[4]</a>. That observation is central to AI trust. Many of the most important deployment questions involve context that is difficult to reduce to a single number. Was the recommendation appropriate for this person? Was the exception handled fairly? Did the human reviewer understand the system’s limitations? Did the workflow encourage independent judgment or passive acceptance?`,
+          `These questions require structured human evaluation. They require organisations to capture human expertise in ways that are consistent enough to learn from, but flexible enough to preserve context.`,
+          `This is one practical reason I am building TaskHived. Not because trust can be productised into a simple label, but because organisations need better ways to gather evidence before AI systems become part of real decisions. TaskHived is one expression of a broader question that shapes my work: how do we make human judgment visible, measurable and useful without pretending it can be fully automated away?`,
+        ],
+      },
+      {
+        id: "a-more-useful-definition",
+        title: "A more useful definition",
+        paragraphs: [
+          "If trust is not a feature, then we need a more useful definition.",
+          "I think of AI trust as a justified organisational decision to rely on a system in a specific context, supported by evidence about performance, human oversight, accountability and consequences.",
+          "This definition has several implications.",
+          "First, trust is conditional. A system may deserve trust in one workflow and not another.",
+          "Second, trust is evidence-based. Confidence without evidence is not trust. It is exposure.",
+          "Third, trust is relational. It involves the system, the user, the affected person and the accountable institution.",
+          "Fourth, trust is dynamic. It must be monitored as data changes, workflows change, models change and social expectations change.",
+          "Finally, trust is never only technical. It depends on human judgment, organisational behaviour and the willingness to remain accountable after deployment.",
+          "The next stage of AI adoption will require more than capable models. It will require organisations to become much better at deciding when capability is enough, when it is not enough and what evidence is needed before a system deserves a place in real work.",
+          "That is the question I keep returning to. Not whether AI can perform a task in isolation, but whether an organisation can responsibly trust it in context.",
+        ],
+      },
+      {
+        id: "what-trust-asks-of-the-organisation",
+        title: "What trust asks of the organisation",
+        paragraphs: [
+          "When trust is understood as a relationship, the organisation’s role becomes clearer.",
+          "The organisation must decide what the system is allowed to influence. It must decide what level of uncertainty is acceptable. It must decide who has the authority to challenge the output. It must decide how affected people can ask for review. It must decide what evidence will be monitored after deployment.",
+          "These are not secondary questions. They are the substance of trust.",
+          "A useful way to test an AI deployment is to imagine the first serious failure. A customer is harmed. A patient receives a poor recommendation. An employee is treated unfairly. A regulator asks for an explanation. A board asks why the system was deployed. At that moment, the organisation will not be able to rely on a general statement that the model was advanced. It will need a record of judgment.",
+          "Why was the system considered ready? What evidence existed? What limitations were known? What tradeoffs were accepted? Who approved the decision? What monitoring was in place? What path existed for correction?",
+          "Trust becomes real when these questions can be answered calmly and specifically.",
+          "This is also why trust cannot be reduced to user sentiment. People may feel confident in a system for the wrong reasons. They may overestimate its reliability because the interface is polished, the output is fluent or the institution behind it appears credible. Conversely, people may distrust a system that is performing well because the organisation has not explained it clearly or given them a way to challenge it.",
+          "A serious trust framework must therefore connect perception to evidence. It should ask not only whether people trust the system, but whether that trust is justified.",
+        ],
+      },
+      {
+        id: "the-discipline-of-justified-reliance",
+        title: "The discipline of justified reliance",
+        paragraphs: [
+          "The phrase I return to is justified reliance.",
+          "Reliance is what happens when an organisation allows an AI system to influence work. Justification is the evidence that makes that reliance responsible. The gap between the two is where many AI deployments become fragile.",
+          "A team may rely on a system because it is efficient. A manager may rely on it because competitors are adopting similar tools. A user may rely on it because it produces confident answers. But justified reliance requires more. It requires a defensible connection between the system’s measured behaviour, the decision context, the human oversight design and the consequences of error.",
+          "This is especially important for enterprise AI because deployment often happens gradually. A tool begins as optional assistance. Then it becomes embedded in a workflow. Then it becomes expected. Eventually, decisions are shaped by it even if no one formally declared that the system is now trusted. Trust can emerge by habit rather than by evidence.",
+          "That is risky.",
+          "Organisations need explicit moments where reliance is reviewed. They need to ask whether informal use has become operational dependency. They need to know whether human users are still exercising judgment or merely accepting outputs. They need to understand whether the system is changing the work in ways that have not been evaluated.",
+          "This is one reason I believe AI trust should be studied as an organisational discipline. The question is not only how to make systems better. It is how to make reliance more deliberate.",
+        ],
+      },
+      {
+        id: "sources",
+        title: "Sources",
+        html: true,
+        paragraphs: [
+          `<span id="ref1" class="scroll-mt-28">[1] <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" target="_blank" rel="noopener noreferrer">Stanford HAI, The 2026 AI Index Report</a></span>`,
+          `<span id="ref2" class="scroll-mt-28">[2] <a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf" target="_blank" rel="noopener noreferrer">NIST, Artificial Intelligence Risk Management Framework 1.0</a></span>`,
+          `<span id="ref3" class="scroll-mt-28">[3] <a href="https://oecd.ai/en/dashboards/ai-principles/P6" target="_blank" rel="noopener noreferrer">OECD AI Principle: Human-centred values and fairness</a></span>`,
+          `<span id="ref4" class="scroll-mt-28">[4] <a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf" target="_blank" rel="noopener noreferrer">NIST AI RMF Appendix C, AI Risk Management and Human-AI Interaction</a></span>`,
+          `<span id="ref5" class="scroll-mt-28">[5] <a href="https://www.ibm.com/careers/blog/beyond-the-ai-hype-what-it-really-takes-to-bring-ai-to-enterprise-scale" target="_blank" rel="noopener noreferrer">IBM Careers, Beyond the AI Hype: What It Really Takes to Bring AI to Enterprise Scale</a></span>`,
+        ],
+      },
+    ],
+  },
+
   /* ─── Article A ─── */
   "ai-trust-gap-capability-faster-than-confidence": {
-    ...posts[0],
+    ...posts[1],
     heroImage: "/images/art_a_1.jpeg",
     sections: [
       {
@@ -217,7 +349,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article C ─── */
   "why-human-judgment-matters-ai-evaluation": {
-    ...posts[1],
+    ...posts[2],
     heroImage: "/images/art_c_1.jpeg",
     sections: [
       {
@@ -253,7 +385,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article D ─── */
   "what-enterprises-should-measure-before-deploying-ai-agents": {
-    ...posts[2],
+    ...posts[3],
     heroImage: "/images/art_d_1.jpeg",
     sections: [
       {
@@ -291,7 +423,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article E ─── */
   "agentic-ai-needs-validation-infrastructure": {
-    ...posts[3],
+    ...posts[4],
     heroImage: "/images/art_e_1.jpeg",
     sections: [
       {
@@ -331,7 +463,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article F ─── */
   "difference-ai-safety-security-trust": {
-    ...posts[5],
+    ...posts[7],
     heroImage: "/images/art_f_1.jpeg",
     sections: [
       {
@@ -379,7 +511,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article G (TaskHived) ─── */
   "regulated-industries-ai-validation-not-a-checkbox": {
-    ...posts[4],
+    ...posts[5],
     heroImage: "/images/article_5.jpeg",
     sections: [
       {
@@ -415,7 +547,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article H (Flagship) ─── */
   "missing-infrastructure-for-ai": {
-    ...posts[5],
+    ...posts[6],
     heroImage: "/images/art_a_1.jpeg",
     sections: [
       {
@@ -471,7 +603,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article I ─── */
   "beyond-benchmarks-evidence-before-deployment": {
-    ...posts[7],
+    ...posts[8],
     heroImage: "/images/art_d_2.jpeg",
     sections: [
       {
@@ -516,7 +648,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article J ─── */
   "before-ai-can-replace-work-it-must-earn-trust": {
-    ...posts[8],
+    ...posts[9],
     heroImage: "/images/art_c_2.jpeg",
     sections: [
       {

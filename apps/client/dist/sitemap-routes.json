@@ -2,7 +2,7 @@
   "version": 2,
   "source": "src/App.tsx",
   "postsSource": "src/data/posts.ts",
-  "generatedAt": "2026-07-14T14:21:37.996Z",
+  "generatedAt": "2026-07-16T06:01:40.675Z",
   "routes": [
     "/",
     "/about",
@@ -16,6 +16,7 @@
     "/writing/from-ai-demo-to-deployment-readiness",
     "/writing/missing-infrastructure-for-ai",
     "/writing/regulated-industries-ai-validation-not-a-checkbox",
+    "/writing/trust-is-not-a-feature-of-an-ai-system",
     "/writing/what-enterprises-should-measure-before-deploying-ai-agents",
     "/writing/why-human-judgment-matters-ai-evaluation"
   ]
