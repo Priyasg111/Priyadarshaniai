@@ -1,4 +1,4 @@
-import axios from "axios";
+import { apiFetch } from "@/lib/api";
 
 export interface User {
   id: number;
@@ -13,14 +13,19 @@ export interface CreateUserRequest {
 
 // GET 请求示例
 export const getUser = async (id: number): Promise<User> => {
-  const response = await axios.get<User>(`https://api.example.com/api/users/${id}`);
-  return response.data;
+  const response = await apiFetch(`/api/users/${id}`, { auth: false });
+  return (await response.json()) as User;
 };
 
 // POST 请求示例
 export const createUser = async (data: CreateUserRequest): Promise<User> => {
-  const response = await axios.post<User>("https://api.example.com/api/users", data);
-  return response.data;
+  const response = await apiFetch("/api/users", {
+    method: "POST",
+    auth: false,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return (await response.json()) as User;
 };
 
 // supabase 请求示例

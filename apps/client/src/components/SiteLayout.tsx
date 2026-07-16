@@ -35,7 +35,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
                 <NavLink
                   key={item.label}
                   to={item.href}
-                  className={({ isActive }) =>
+                  className={({ isActive }: { isActive: boolean }) =>
                     `text-sm transition hover:text-primary ${isActive ? "text-primary" : "text-muted-foreground"}`
                   }
                 >

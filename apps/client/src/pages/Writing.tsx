@@ -1,5 +1,4 @@
 import { ArrowDownToLine, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import { PostCard } from "@/components/PostCard";
 import { SiteLayout } from "@/components/SiteLayout";
 import SubstackFeed from "@/components/SubstackFeed";
