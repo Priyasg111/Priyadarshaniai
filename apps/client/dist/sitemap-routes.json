@@ -2,7 +2,7 @@
   "version": 2,
   "source": "src/App.tsx",
   "postsSource": "src/data/posts.ts",
-  "generatedAt": "2026-07-18T04:46:14.522Z",
+  "generatedAt": "2026-07-18T05:25:17.590Z",
   "routes": [
     "/",
     "/about",
