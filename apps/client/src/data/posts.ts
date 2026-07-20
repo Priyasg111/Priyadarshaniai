@@ -1,3 +1,8 @@
+const NIST_APPENDIX_C_URL =
+  "https://airc.nist.gov/airmf-resources/airmf/appendices/app-c-ai-ri" +
+  "sk" +
+  "-management-and-human-ai-interaction/";
+
 export type Post = {
   title: string;
   slug: string;
@@ -9,6 +14,9 @@ export type Post = {
   author?: string;
   readTime?: string;
   featured?: boolean;
+  datePublished?: string;
+  metaDescription?: string;
+  keywords?: string[];
 };
 
 export type ArticleSection = {
@@ -29,6 +37,30 @@ export type Article = Post & {
 };
 
 export const posts: Post[] = [
+  {
+    title: "Where Human Judgement Still Matters Most",
+    slug: "where-human-judgement-still-matters-most",
+    date: "Jul 20, 2026",
+    datePublished: "2026-07-20",
+    image: "/images/where-human-judgement-matters-essay-hero_2.png",
+    excerpt:
+      "Human judgement matters most where interpretation, escalation, contestability, tradeoffs and responsibility shape whether an AI-supported decision deserves trust.",
+    metaDescription:
+      "Where human judgement matters most in AI decisions: interpretation, escalation, contestability, tradeoffs and responsibility before deployment.",
+    keywords: [
+      "human judgement in AI",
+      "human oversight in AI",
+      "meaningful human control",
+      "AI decision-making",
+      "AI contestability",
+      "AI escalation",
+      "AI deployment trust",
+    ],
+    category: "Human Judgement",
+    author: "Priya Darshani",
+    readTime: "10 min read",
+    featured: false,
+  },
   {
     title: "Trust Is Not a Feature of an AI System",
     slug: "trust-is-not-a-feature-of-an-ai-system",
@@ -136,9 +168,131 @@ export const featuredHomePost: Post = {
 };
 
 export const articles: Record<string, Article> = {
+  /* @section: where-human-judgement-still-matters-most-essay */
+  "where-human-judgement-still-matters-most": {
+    ...posts[0],
+    heroImage: "/images/where-human-judgement-matters-essay-hero_2.png",
+    authorDescription: "Founder, TaskHived | Researching how organisations evaluate, trust and deploy artificial intelligence responsibly.",
+    showExcerpt: false,
+    sections: [
+      {
+        id: "the-uncomfortable-middle",
+        title: "The uncomfortable middle",
+        paragraphs: [
+          "The most difficult AI decisions do not sit at the extremes.",
+          "At one extreme are tasks where automation is clearly useful. Summarising a document, classifying low-risk information, routing a routine request or drafting a first version of a message may not require deep human deliberation every time. At the other extreme are decisions where full automation would be unacceptable because the consequences are too high, the context is too complex or the moral responsibility is too significant.",
+          "The harder question sits in the middle.",
+          "Where should human judgment remain part of the decision process, even when AI can perform much of the task? Where is a human not merely a reviewer, but an essential part of deciding whether the system should be trusted?",
+          "This question matters because AI deployment is increasingly moving from assistance toward action. Systems are no longer only producing text or analysis. They are shaping workflows, recommendations, risk scores, triage decisions, customer interactions and operational priorities. As this happens, organisations need more precise language for the kinds of judgment that should remain human.",
+          "Human judgment is often discussed as if it were a single thing. It is not. It includes interpretation, escalation, contestability, responsibility, ethical reasoning, contextual awareness and the ability to notice when a situation does not fit the pattern. These capacities become most important when the decision cannot be reduced to a prediction.",
+        ],
+      },
+      {
+        id: "interpretation-is-not-the-same-as-output-review",
+        title: "Interpretation is not the same as output review",
+        html: true,
+        paragraphs: [
+          `Many organisations assume that human oversight means asking a person to check an AI output before it is used. That may be necessary, but it is not sufficient.`,
+          `The EU AI Act’s Article 14 says high-risk AI systems must be designed and developed so they can be effectively overseen by natural persons during use <a href="https://artificialintelligenceact.eu/article/14/" target="_blank" rel="noopener noreferrer">[1]</a>. It also says the people assigned to oversight should be able to understand relevant capacities and limitations, monitor operation, remain aware of automation bias, correctly interpret outputs, disregard or override outputs and intervene or interrupt the system <a href="https://artificialintelligenceact.eu/article/14/" target="_blank" rel="noopener noreferrer">[1]</a>.`,
+          `This is a richer definition than simple review. It suggests that meaningful oversight requires the human to understand the system well enough to know when not to trust it.`,
+          `That distinction matters. A reviewer who only checks whether an output looks plausible may reinforce the system’s errors. A reviewer who understands the system’s limitations can ask a different set of questions. Is the input context similar to the data the system was evaluated on? Is the recommendation unusually confident? Is the case outside the normal range? Is there missing information that changes the decision? Would a person affected by the decision have a reasonable basis to challenge it?`,
+          `Interpretation is active. It requires the human to bring domain knowledge, situational awareness and responsibility to the decision. Without that, human oversight can become a ritual rather than a safeguard.`,
+          `NIST’s human-AI interaction appendix warns that humans perceive and derive meaning from AI outputs and explanations in different ways <a href="${NIST_APPENDIX_C_URL}" target="_blank" rel="noopener noreferrer">[2]</a>. This is important because explanation alone does not guarantee understanding. An explanation may satisfy a technical requirement while failing to support good judgment. The real question is whether the human can use the information to make a better decision.`,
+        ],
+      },
+      {
+        id: "escalation-is-a-form-of-intelligence",
+        title: "Escalation is a form of intelligence",
+        html: true,
+        paragraphs: [
+          `A good AI deployment should not only ask whether the system can answer. It should ask when the system should stop.`,
+          `Escalation is one of the most important forms of human judgment. It is the ability to recognize that a case requires more expertise, more evidence or a different decision process. In mature organisations, escalation is not failure. It is a sign that the system understands the limits of routine processing.`,
+          `This matters because many AI systems are evaluated on average performance. But deployment risk often lives in edge cases. A system may perform well overall while failing in unusual, ambiguous or high-stakes situations. If the workflow does not make escalation easy, those cases can be forced through an inappropriate process.`,
+          `Article 14 of the EU AI Act includes the ability to disregard, override or reverse the output of a high-risk AI system, as well as the ability to intervene or interrupt system operation <a href="https://artificialintelligenceact.eu/article/14/" target="_blank" rel="noopener noreferrer">[1]</a>. These are not minor operational details. They are the practical mechanisms by which human judgment remains meaningful.`,
+          `Escalation also requires organisational support. A human cannot exercise judgment well if they are punished for slowing a process down, if they lack authority to challenge the system, or if the interface makes disagreement difficult. Human oversight is not only a matter of placing a person in the loop. It is a matter of designing the loop so the person can act.`,
+          `The OECD principle on human-centred values and fairness similarly refers to safeguards such as human agency and oversight, including risks from uses outside intended purpose, intentional misuse or unintentional misuse <a href="https://oecd.ai/en/dashboards/ai-principles/P6" target="_blank" rel="noopener noreferrer">[3]</a>. Those risks cannot be managed by automation alone. They require people who are able to recognise when the system is drifting outside the conditions under which it deserves trust.`,
+        ],
+      },
+      {
+        id: "contestability-protects-trust",
+        title: "Contestability protects trust",
+        html: true,
+        paragraphs: [
+          `Human judgment also matters when people affected by AI decisions need a way to question them.`,
+          `Contestability is often treated as a legal or compliance concern. It is also a trust concern. If an organisation cannot explain how a decision was made, cannot correct an error and cannot offer a meaningful path for review, then trust becomes fragile even when the system performs well most of the time.`,
+          `The history of automated decision systems offers many reminders that the absence of contestability can turn technical problems into institutional failures. The Post Office Horizon litigation in the United Kingdom is not an AI case in the modern sense, but it is a powerful warning about opaque systems, weak challenge mechanisms and institutional overconfidence in technology. In the Horizon Issues judgment, the court found that remote access and editing of transaction data was possible and that the system did not alert sub-postmasters to certain errors, bugs or defects <a href="https://www.judiciary.uk/wp-content/uploads/2019/12/bates-v-post-office-judgment.pdf" target="_blank" rel="noopener noreferrer">[4]</a>. The details are specific to that case, but the broader lesson is relevant to AI deployment. When people cannot see, challenge or correct a system that affects them, technical uncertainty becomes human harm.`,
+          `Contestability requires more than a complaint channel. It requires evidence. What information was used? What output was generated? Who reviewed it? What alternatives were considered? Was the system operating within its intended use? Did a human have authority to change the outcome?`,
+          `These questions make human judgment auditable. They also make trust more realistic, because trust is not the belief that a system will never fail. It is the confidence that failure can be detected, understood and corrected.`,
+        ],
+      },
+      {
+        id: "responsibility-cannot-be-automated",
+        title: "Responsibility cannot be automated",
+        html: true,
+        paragraphs: [
+          `The idea of meaningful human control helps clarify why human judgment still matters. A Frontiers in Robotics and AI article develops two conditions for meaningful human control over autonomous systems: tracking and tracing <a href="https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2018.00015/full" target="_blank" rel="noopener noreferrer">[5]</a>. Tracking concerns whether the system responds to relevant human moral reasons and relevant facts in the operating environment. Tracing concerns whether outcomes can be traced to at least one human in the design or operation chain who understands system capabilities and potential effects <a href="https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2018.00015/full" target="_blank" rel="noopener noreferrer">[5]</a>.`,
+          `These ideas are useful beyond the original military context. They remind us that responsibility requires both responsiveness and traceability. It is not enough for a human to be somewhere near the system. The human role must be connected to the reasons that matter and to the consequences that follow.`,
+          `In enterprise AI, this means organisations need to know who owns the deployment decision. Who decides that evidence is sufficient? Who defines acceptable error? Who monitors performance after launch? Who can pause the system? Who answers when an affected person asks why a decision was made?`,
+          `AI can automate tasks. It cannot absorb responsibility for the institution.`,
+          `This is why the human role should not be designed as a decorative checkpoint. It should be designed around the places where judgment genuinely changes the quality of the decision. That includes ambiguous cases, high-impact decisions, value tradeoffs, exceptions, disagreement between experts, evidence gaps and situations where the cost of being wrong is not evenly distributed.`,
+        ],
+      },
+      {
+        id: "designing-for-better-judgment",
+        title: "Designing for better judgment",
+        html: true,
+        paragraphs: [
+          `The next generation of AI deployment will require better systems for human judgment, not just better systems for model performance.`,
+          `Organisations should begin by mapping where judgment matters most. Not every decision requires the same level of human involvement. But every serious deployment should identify the points at which interpretation, escalation, contestability and responsibility are necessary.`,
+          `They should then make those points measurable. How often do humans override the system? In which cases? For what reasons? Where do experts disagree? Which outputs create uncertainty? Which users are most likely to over-rely on recommendations? NIST notes that data about the frequency and rationale with which humans overrule AI output may be useful to collect and analyze <a href="${NIST_APPENDIX_C_URL}" target="_blank" rel="noopener noreferrer">[2]</a>. That is a practical starting point for turning human judgment into deployment evidence.`,
+          `This is the area I find most important. Human judgment should not be treated as friction that slows AI down. It should be treated as a source of evidence that helps organisations understand when AI deserves trust.`,
+          `TaskHived is one practical application of this idea. The broader mission is not to preserve human involvement for its own sake. It is to understand where human expertise improves decision quality and how that expertise can be made visible before deployment.`,
+          `The question is not whether humans should always stay in the loop. The question is where human judgment changes what the organisation can responsibly trust.`,
+        ],
+      },
+      {
+        id: "tradeoffs-require-human-reasoning",
+        title: "Tradeoffs require human reasoning",
+        paragraphs: [
+          "Human judgment also matters where values conflict.",
+          "Many organisational decisions are not simply questions of accuracy. They involve tradeoffs between speed and care, consistency and flexibility, efficiency and fairness, autonomy and oversight, privacy and usefulness. AI can help surface information, but it cannot decide on behalf of an institution what tradeoffs are acceptable.",
+          "This is why human judgment remains central in regulated and high-impact environments. The most difficult decision is often not whether an output is correct in isolation. It is whether acting on that output is appropriate given the context.",
+          "A risk score may be statistically useful and still require careful interpretation. A recommendation may be efficient and still create unfair outcomes for a particular group. A triage suggestion may be plausible and still need escalation because the case carries unusual consequences. A compliance alert may be technically valid and still require judgment about proportional response.",
+          "These are not failures of AI. They are features of real decision-making.",
+          "If organisations treat every AI output as a narrow technical answer, they will miss the broader judgment involved in using it. The human role is not only to catch mistakes. It is to understand meaning, consequence and responsibility.",
+        ],
+      },
+      {
+        id: "measuring-judgment-without-flattening-it",
+        title: "Measuring judgment without flattening it",
+        paragraphs: [
+          "The challenge is that human judgment is difficult to measure.",
+          "It is tempting to avoid measuring it altogether, or to reduce it to simplistic labels such as approve or reject. Neither approach is enough. If organisations want to understand when AI deserves trust, they need better evidence about how humans interact with AI outputs.",
+          "This does not mean pretending human judgment is perfectly objective. It means designing evaluation processes that make judgment visible. Experts can review outputs independently. Their confidence can be captured. Their reasons for agreement or disagreement can be recorded. Areas of uncertainty can be identified. Patterns in overrides can be studied. Disagreement can be treated as evidence rather than noise.",
+          "The goal is not to remove the human element from judgment. The goal is to learn from it.",
+          "A good evaluation process should preserve context while creating structure. It should allow experts to explain why a recommendation is unsafe, incomplete, misleading or useful. It should distinguish between errors that matter and errors that do not. It should identify where the AI improves decision quality and where it creates new risk.",
+          "This is different from asking humans to rubber-stamp outputs after deployment. It brings human judgment into the evaluation process before deployment, where it can shape the decision about whether the system is ready.",
+          "In that sense, human judgment is not a fallback. It is a source of knowledge.",
+        ],
+      },
+      {
+        id: "sources",
+        title: "Sources",
+        html: true,
+        paragraphs: [
+          `<span id="ref1" class="scroll-mt-28">[1] <a href="https://artificialintelligenceact.eu/article/14/" target="_blank" rel="noopener noreferrer">EU Artificial Intelligence Act, Article 14</a></span>`,
+          `<span id="ref2" class="scroll-mt-28">[2] <a href="${NIST_APPENDIX_C_URL}" target="_blank" rel="noopener noreferrer">NIST AI RMF Appendix C, AI Risk Management and Human-AI Interaction</a></span>`,
+          `<span id="ref3" class="scroll-mt-28">[3] <a href="https://oecd.ai/en/dashboards/ai-principles/P6" target="_blank" rel="noopener noreferrer">OECD AI Principle: Human-centred values and fairness</a></span>`,
+          `<span id="ref4" class="scroll-mt-28">[4] <a href="https://www.judiciary.uk/wp-content/uploads/2019/12/bates-v-post-office-judgment.pdf" target="_blank" rel="noopener noreferrer">Bates v Post Office, Horizon Issues Judgment</a></span>`,
+          `<span id="ref5" class="scroll-mt-28">[5] <a href="https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2018.00015/full" target="_blank" rel="noopener noreferrer">Frontiers in Robotics and AI, Meaningful Human Control over Autonomous Systems</a></span>`,
+        ],
+      },
+    ],
+  },
+
   /* @section: trust-is-not-a-feature-essay */
   "trust-is-not-a-feature-of-an-ai-system": {
-    ...posts[0],
+    ...posts[1],
     heroImage: "/images/trust-not-feature-essay-hero_2.png",
     authorDescription: "Founder, TaskHived | Researching how organisations evaluate, trust and deploy artificial intelligence responsibly.",
     showExcerpt: false,
@@ -255,7 +409,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article A ─── */
   "ai-trust-gap-capability-faster-than-confidence": {
-    ...posts[1],
+    ...posts[2],
     heroImage: "/images/art_a_1.jpeg",
     sections: [
       {
@@ -349,7 +503,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article C ─── */
   "why-human-judgment-matters-ai-evaluation": {
-    ...posts[2],
+    ...posts[3],
     heroImage: "/images/art_c_1.jpeg",
     sections: [
       {
@@ -385,7 +539,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article D ─── */
   "what-enterprises-should-measure-before-deploying-ai-agents": {
-    ...posts[3],
+    ...posts[4],
     heroImage: "/images/art_d_1.jpeg",
     sections: [
       {
@@ -423,7 +577,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article E ─── */
   "agentic-ai-needs-validation-infrastructure": {
-    ...posts[4],
+    ...posts[5],
     heroImage: "/images/art_e_1.jpeg",
     sections: [
       {
@@ -463,7 +617,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article F ─── */
   "difference-ai-safety-security-trust": {
-    ...posts[7],
+    ...posts[8],
     heroImage: "/images/art_f_1.jpeg",
     sections: [
       {
@@ -511,7 +665,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article G (TaskHived) ─── */
   "regulated-industries-ai-validation-not-a-checkbox": {
-    ...posts[5],
+    ...posts[6],
     heroImage: "/images/article_5.jpeg",
     sections: [
       {
@@ -547,7 +701,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article H (Flagship) ─── */
   "missing-infrastructure-for-ai": {
-    ...posts[6],
+    ...posts[7],
     heroImage: "/images/art_a_1.jpeg",
     sections: [
       {
@@ -603,7 +757,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article I ─── */
   "beyond-benchmarks-evidence-before-deployment": {
-    ...posts[8],
+    ...posts[9],
     heroImage: "/images/art_d_2.jpeg",
     sections: [
       {
@@ -648,7 +802,7 @@ export const articles: Record<string, Article> = {
 
   /* ─── Article J ─── */
   "before-ai-can-replace-work-it-must-earn-trust": {
-    ...posts[9],
+    ...posts[10],
     heroImage: "/images/art_c_2.jpeg",
     sections: [
       {

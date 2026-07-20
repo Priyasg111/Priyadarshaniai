@@ -60,6 +60,13 @@ function absoluteAssetUrl(path) {
   return `${SITE_URL}${path.startsWith("/") ? "" : "/"}${path}`;
 }
 
+function imageMimeType(path = "") {
+  if (/\.png(?:$|\?)/i.test(path)) return "image/png";
+  if (/\.webp(?:$|\?)/i.test(path)) return "image/webp";
+  if (/\.gif(?:$|\?)/i.test(path)) return "image/gif";
+  return "image/jpeg";
+}
+
 function parseDate(value) {
   if (!value) return null;
   const raw = String(value).trim();
@@ -143,7 +150,7 @@ function generateRss(items) {
     const image = absoluteAssetUrl(article.heroImage || article.image);
     const categories = articleCategories(article).map((category) => `      <category>${escapeXml(category)}</category>`).join("\n");
     const html = articleHtml(article);
-    return `    <item>\n      <title>${escapeXml(article.title)}</title>\n      <link>${escapeXml(url)}</link>\n      <guid isPermaLink="true">${escapeXml(url)}</guid>\n      <description>${cdata(article.excerpt)}</description>\n      <content:encoded>${cdata(html)}</content:encoded>\n      <dc:creator>${escapeXml(article.author || AUTHOR.name)}</dc:creator>\n      <pubDate>${rfc822Date(article.date)}</pubDate>\n      <atom:updated>${isoDate(article.updatedDate || article.date, article.date)}</atom:updated>\n      <priya:updatedDate>${escapeXml(article.updatedDate || article.date)}</priya:updatedDate>\n      <priya:readingTime>${escapeXml(computedReadTime(article))}</priya:readingTime>\n      <priya:canonicalUrl>${escapeXml(url)}</priya:canonicalUrl>\n${categories}\n      <media:content url="${escapeXml(image)}" medium="image" />\n      <media:thumbnail url="${escapeXml(image)}" />\n      <enclosure url="${escapeXml(image)}" type="image/jpeg" />\n    </item>`;
+    return `    <item>\n      <title>${escapeXml(article.title)}</title>\n      <link>${escapeXml(url)}</link>\n      <guid isPermaLink="true">${escapeXml(url)}</guid>\n      <description>${cdata(article.excerpt)}</description>\n      <content:encoded>${cdata(html)}</content:encoded>\n      <dc:creator>${escapeXml(article.author || AUTHOR.name)}</dc:creator>\n      <pubDate>${rfc822Date(article.datePublished || article.date)}</pubDate>\n      <atom:updated>${isoDate(article.updatedDate || article.datePublished || article.date, article.datePublished || article.date)}</atom:updated>\n      <priya:updatedDate>${escapeXml(article.updatedDate || article.date)}</priya:updatedDate>\n      <priya:readingTime>${escapeXml(computedReadTime(article))}</priya:readingTime>\n      <priya:canonicalUrl>${escapeXml(url)}</priya:canonicalUrl>\n${categories}\n      <media:content url="${escapeXml(image)}" medium="image" />\n      <media:thumbnail url="${escapeXml(image)}" />\n      <enclosure url="${escapeXml(image)}" type="${imageMimeType(image)}" />\n    </item>`;
   }).join("\n");
 
   return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"\n  xmlns:atom="http://www.w3.org/2005/Atom"\n  xmlns:content="http://purl.org/rss/1.0/modules/content/"\n  xmlns:dc="http://purl.org/dc/elements/1.1/"\n  xmlns:media="http://search.yahoo.com/mrss/"\n  xmlns:priya="https://priyadarshani.ai/feed/ns#">\n  <channel>\n    <title>${escapeXml(SITE_TITLE)}</title>\n    <link>${escapeXml(SITE_URL)}</link>\n    <atom:link href="${escapeXml(`${SITE_URL}/feed.xml`)}" rel="self" type="application/rss+xml" />\n    <description>${escapeXml(SITE_DESCRIPTION)}</description>\n    <language>en</language>\n    <lastBuildDate>${new Date(latest || Date.now()).toUTCString()}</lastBuildDate>\n    <generator>priyadarshani.ai content feed generator</generator>\n${rssItems}\n  </channel>\n</rss>\n`;
@@ -171,13 +178,17 @@ function generateJsonFeed(items) {
         content_text: plainText(article),
         image,
         banner_image: image,
-        tags: articleCategories(article),
+        tags: Array.from(new Set([...articleCategories(article), ...(article.keywords || [])])),
         authors: [{ name: article.author || AUTHOR.name, url: AUTHOR.url }],
-        date_published: isoDate(article.date),
-        date_modified: isoDate(article.updatedDate || article.date, article.date),
+        date_published: isoDate(article.datePublished || article.date),
+        date_modified: isoDate(
+          article.updatedDate || article.datePublished || article.date,
+          article.datePublished || article.date
+        ),
         _metadata: {
           reading_time: computedReadTime(article),
           canonical_url: url,
+          meta_description: article.metaDescription || article.excerpt,
         },
       };
     }),
@@ -194,7 +205,10 @@ function generateSitemap(items) {
   ];
   const articleRoutes = items.map((article) => ({
     loc: slugUrl(article.slug),
-    lastmod: sitemapDate(article.updatedDate || article.date, article.date),
+    lastmod: sitemapDate(
+      article.updatedDate || article.datePublished || article.date,
+      article.datePublished || article.date
+    ),
   }));
   const urls = [...staticRoutes, ...articleRoutes];
   const body = urls.map((entry) => `  <url>\n    <loc>${escapeXml(entry.loc)}</loc>\n    <lastmod>${escapeXml(entry.lastmod)}</lastmod>\n  </url>`).join("\n");

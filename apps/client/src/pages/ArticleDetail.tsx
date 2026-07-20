@@ -13,18 +13,27 @@ export default function ArticleDetail() {
     ? `https://priyadarshani.ai${article.heroImage.startsWith('/') ? '' : '/'}${article.heroImage}`
     : 'https://priyadarshani.ai/images/priya-headshot.jpg';
 
+  const publicationDate = article?.datePublished || article?.date;
+  const modificationDate = article?.updatedDate || publicationDate;
+  const description = article?.metaDescription || article?.excerpt ||
+    'Long-form essays exploring how organisations evaluate, trust and deploy artificial intelligence.';
+
   useSEO(
     article
       ? {
           title: `${article.title} | Priya Darshani`,
-          description: article.excerpt,
+          description,
           canonical: `https://priyadarshani.ai/writing/${article.slug}`,
           ogTitle: article.title,
-          ogDescription: article.excerpt,
+          ogDescription: description,
           ogImage,
           ogType: 'article',
-          articlePublishedTime: article.date,
-          articleModifiedTime: article.updatedDate || article.date,
+          articlePublishedTime: publicationDate,
+          articleModifiedTime: modificationDate,
+          robots: 'index, follow',
+          author: article.author || 'Priya Darshani',
+          keywords: article.keywords,
+          twitterCard: 'summary_large_image',
         }
       : {
           title: 'Essays | Priya Darshani',
@@ -41,7 +50,9 @@ export default function ArticleDetail() {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": article.title,
-      "description": article.excerpt,
+      "description": description,
+      "image": [ogImage],
+      "keywords": article.keywords?.join(", "),
       "author": {
         "@type": "Person",
         "name": "Priya Darshani",
@@ -52,15 +63,15 @@ export default function ArticleDetail() {
           "name": "TaskHived",
           "url": "https://taskhived.com",
         },
-        "description": "Researching how organisations evaluate, trust and deploy artificial intelligence.",
+        "description": "Researching how organisations evaluate, trust and deploy artificial intelligence responsibly.",
       },
       "publisher": {
         "@type": "Person",
         "name": "Priya Darshani",
         "url": "https://priyadarshani.ai",
       },
-      "datePublished": article.date,
-      "dateModified": article.updatedDate || article.date,
+      "datePublished": publicationDate,
+      "dateModified": modificationDate,
       "url": `https://priyadarshani.ai/writing/${article.slug}`,
       "mainEntityOfPage": {
         "@type": "WebPage",
@@ -73,7 +84,9 @@ export default function ArticleDetail() {
       },
     };
 
-    let el = document.getElementById('article-jsonld') as HTMLScriptElement | null;
+    const duplicateSchemas = Array.from(document.querySelectorAll('#article-jsonld')) as HTMLScriptElement[];
+    let el = duplicateSchemas[0] || null;
+    duplicateSchemas.slice(1).forEach((duplicate) => duplicate.remove());
     if (!el) {
       el = document.createElement('script');
       el.id = 'article-jsonld';
@@ -87,7 +100,7 @@ export default function ArticleDetail() {
       const existing = document.getElementById('article-jsonld');
       if (existing) existing.remove();
     };
-  }, [article, ogImage]);
+  }, [article, description, modificationDate, ogImage, publicationDate]);
 
   if (!article) {
     return <Navigate to="/writing" replace />;

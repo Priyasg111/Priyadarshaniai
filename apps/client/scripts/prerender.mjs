@@ -1,11 +1,11 @@
-// Home-page prerender for the CSR (vite + react + BrowserRouter) client workspace.
+// Indexable-route prerender for the CSR (vite + react + BrowserRouter) client workspace.
 //
-// Runs after `vite build` from apps/client. It SSR-renders the home route once
-// and bakes the resulting markup into dist/index.html's #root, so crawlers that
-// don't execute JS still see real content. The client then hydrates it back into
-// the normal CSR app.
-import { readFileSync, writeFileSync, rmSync } from "fs";
-import { relative, resolve, sep } from "path";
+// Runs after `vite build` from apps/client. It SSR-renders the home route and
+// every published article route into dist so crawlers and social clients receive
+// real content and page-specific metadata. The client hydrates the markup back
+// into the normal CSR app.
+import { mkdirSync, readFileSync, writeFileSync, rmSync } from "fs";
+import { dirname, relative, resolve, sep } from "path";
 import React from "react";
 import { parse } from "@babel/parser";
 import _traverse from "@babel/traverse";
@@ -256,6 +256,85 @@ function createPrerenderSafeRenderPlugin(cwd) {
   };
 }
 
+function escapeHtml(value = "") {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function replaceOrInsertHeadTag(html, pattern, replacement) {
+  if (pattern.test(html)) return html.replace(pattern, replacement);
+  return html.replace("</head>", `    ${replacement}\n  </head>`);
+}
+
+function articleTemplate(template, item) {
+  const canonical = item.url;
+  const description = item._metadata?.meta_description || item.summary;
+  const keywords = Array.isArray(item.tags) ? item.tags.join(", ") : "";
+  const image = item.banner_image || item.image;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: item.title,
+    description,
+    image: [image],
+    keywords,
+    author: {
+      "@type": "Person",
+      name: "Priya Darshani",
+      url: "https://priyadarshani.ai/about",
+      jobTitle: "Founder",
+      worksFor: {
+        "@type": "Organization",
+        name: "TaskHived",
+        url: "https://taskhived.com",
+      },
+      description: "Researching how organisations evaluate, trust and deploy artificial intelligence responsibly.",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Priya Darshani",
+      url: "https://priyadarshani.ai",
+    },
+    datePublished: item.date_published,
+    dateModified: item.date_modified,
+    url: canonical,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonical,
+    },
+    isPartOf: {
+      "@type": "Blog",
+      name: "Essays by Priya Darshani",
+      url: "https://priyadarshani.ai/writing",
+    },
+  };
+
+  let html = template;
+  html = replaceOrInsertHeadTag(html, /<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(`${item.title} | Priya Darshani`)}</title>`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+name=["']description["'][^>]*>/i, `<meta name="description" content="${escapeHtml(description)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+name=["']author["'][^>]*>/i, `<meta name="author" content="Priya Darshani" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+name=["']keywords["'][^>]*>/i, `<meta name="keywords" content="${escapeHtml(keywords)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+name=["']robots["'][^>]*>/i, `<meta name="robots" content="index, follow" />`);
+  html = replaceOrInsertHeadTag(html, /<link\s+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${escapeHtml(canonical)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${escapeHtml(item.title)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+property=["']og:description["'][^>]*>/i, `<meta property="og:description" content="${escapeHtml(description)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+property=["']og:type["'][^>]*>/i, `<meta property="og:type" content="article" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+property=["']og:url["'][^>]*>/i, `<meta property="og:url" content="${escapeHtml(canonical)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+property=["']og:image["'][^>]*>/i, `<meta property="og:image" content="${escapeHtml(image)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+name=["']twitter:card["'][^>]*>/i, `<meta name="twitter:card" content="summary_large_image" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+name=["']twitter:title["'][^>]*>/i, `<meta name="twitter:title" content="${escapeHtml(item.title)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+name=["']twitter:description["'][^>]*>/i, `<meta name="twitter:description" content="${escapeHtml(description)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+name=["']twitter:image["'][^>]*>/i, `<meta name="twitter:image" content="${escapeHtml(image)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+property=["']article:published_time["'][^>]*>/i, `<meta property="article:published_time" content="${escapeHtml(item.date_published)}" />`);
+  html = replaceOrInsertHeadTag(html, /<meta\s+property=["']article:modified_time["'][^>]*>/i, `<meta property="article:modified_time" content="${escapeHtml(item.date_modified)}" />`);
+  const articleJsonLd = `<script id="article-jsonld" type="application/ld+json">${JSON.stringify(structuredData).replace(/</g, "\\u003c")}</script>`;
+  html = html.replace("</head>", `    ${articleJsonLd}\n  </head>`);
+  return html.replace('src="./app-config.js"', 'src="/app-config.js"');
+}
+
 async function run() {
   const cwd = process.cwd();
   const htmlPath = resolve(cwd, "dist/index.html");
@@ -316,13 +395,33 @@ async function run() {
 
     const { renderToString } = await import("react-dom/server");
     const { default: App } = await import(`${resolve(cwd, "dist-ssr/App.js")}?prerender=${Date.now()}`);
-    const html = renderToString(React.createElement(App));
 
-    if (!html.trim()) return warnAndSkip("empty SSR output");
+    const renderRoute = (pathname) => {
+      window.history.replaceState({}, "", pathname);
+      const html = renderToString(React.createElement(App));
+      if (!html.trim()) throw new Error(`empty SSR output for ${pathname}`);
+      return html;
+    };
 
-    const rendered = template.replace(ROOT_RE, `<div id="root">${html}</div>`);
-    writeFileSync(htmlPath, rendered);
-    console.log("[prerender] home page baked into dist/index.html");
+    const homeHtml = renderRoute("/");
+    const renderedHome = template.replace(ROOT_RE, `<div id="root">${homeHtml}</div>`);
+    writeFileSync(htmlPath, renderedHome);
+
+    const feed = JSON.parse(readFileSync(resolve(cwd, "dist/feed.json"), "utf-8"));
+    const articleItems = Array.isArray(feed.items) ? feed.items : [];
+    for (const item of articleItems) {
+      const pathname = new URL(item.url).pathname;
+      const articleHtml = renderRoute(pathname);
+      const articlePage = articleTemplate(
+        template.replace(ROOT_RE, `<div id="root">${articleHtml}</div>`),
+        item
+      );
+      const outputPath = resolve(cwd, `dist${pathname}/index.html`);
+      mkdirSync(dirname(outputPath), { recursive: true });
+      writeFileSync(outputPath, articlePage);
+    }
+
+    console.log(`[prerender] home page and ${articleItems.length} article pages baked into dist`);
   } catch (e) {
     return warnAndSkip("render failed", e);
   } finally {

@@ -10,6 +10,10 @@ interface SEOMeta {
   ogType?: string;
   articlePublishedTime?: string;
   articleModifiedTime?: string;
+  robots?: string;
+  author?: string;
+  keywords?: string[];
+  twitterCard?: 'summary' | 'summary_large_image';
 }
 
 function setMeta(name: string, content: string, attr: 'name' | 'property' = 'name') {
@@ -20,6 +24,10 @@ function setMeta(name: string, content: string, attr: 'name' | 'property' = 'nam
     document.head.appendChild(el);
   }
   el.content = content;
+}
+
+function removeMeta(name: string, attr: 'name' | 'property' = 'name') {
+  document.querySelector(`meta[${attr}="${name}"]`)?.remove();
 }
 
 function setLink(rel: string, href: string) {
@@ -42,20 +50,47 @@ export function useSEO({
   ogType,
   articlePublishedTime,
   articleModifiedTime,
+  robots = 'index, follow',
+  author = 'Priya Darshani',
+  keywords,
+  twitterCard = 'summary_large_image',
 }: SEOMeta) {
   useEffect(() => {
     document.title = title;
     setMeta('description', description);
+    setMeta('robots', robots);
+    setMeta('author', author);
+    if (keywords?.length) setMeta('keywords', keywords.join(', '));
+    else removeMeta('keywords');
     setLink('canonical', canonical);
     setMeta('og:title', ogTitle || title, 'property');
     setMeta('og:description', ogDescription || description, 'property');
     setMeta('og:url', canonical, 'property');
     setMeta('og:type', ogType || 'website', 'property');
     if (ogImage) setMeta('og:image', ogImage, 'property');
-    setMeta('twitter:title', ogTitle || title, 'name');
-    setMeta('twitter:description', ogDescription || description, 'name');
-    if (ogImage) setMeta('twitter:image', ogImage, 'name');
+    else removeMeta('og:image', 'property');
+    setMeta('twitter:card', twitterCard);
+    setMeta('twitter:title', ogTitle || title);
+    setMeta('twitter:description', ogDescription || description);
+    if (ogImage) setMeta('twitter:image', ogImage);
+    else removeMeta('twitter:image');
     if (articlePublishedTime) setMeta('article:published_time', articlePublishedTime, 'property');
+    else removeMeta('article:published_time', 'property');
     if (articleModifiedTime) setMeta('article:modified_time', articleModifiedTime, 'property');
-  }, [title, description, canonical, ogTitle, ogDescription, ogImage, ogType, articlePublishedTime, articleModifiedTime]);
+    else removeMeta('article:modified_time', 'property');
+  }, [
+    articleModifiedTime,
+    articlePublishedTime,
+    author,
+    canonical,
+    description,
+    keywords,
+    ogDescription,
+    ogImage,
+    ogTitle,
+    ogType,
+    robots,
+    title,
+    twitterCard,
+  ]);
 }
